@@ -97,6 +97,8 @@
 8. [**Chapter 8: Functions**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter8_Functions.md)
 	- Термины 
 	- Общее, main, void
+		-Передача в main() аргументов из командной строки
+			- Командная строка
 	- Прототип функции
 	- Аргументы
 		- по значению

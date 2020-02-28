@@ -16,11 +16,11 @@ struct Person{                                 // initialisation of a struct
 /* Можно делать default присвоение. Их надо ставить в конце, чтобы при инициализации их не переписать, оставив
 объявленные без данных. Для них не работает uniform инициализация (способ 3) */
 //    double salary = 4000;
-    
-}
+};
+
 vector<Person> staff;                          //create vector of Person(s)
-staff.push_badck({"Ivan","Ivanov", 24});       //initialisation of a instance of Person
-staff.push_badck({"Petr","Petrov", 100});
+staff.push_back({"Ivan","Ivanov", 24});       //initialisation of a instance of Person
+staff.push_back({"Petr","Petrov", 100});
 cout << staff[0].name;                         //prints "Ivan". Calling a variable of a stuct
 ```
 #### Присвоение значений полям

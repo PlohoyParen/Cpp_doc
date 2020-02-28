@@ -102,3 +102,26 @@ int main()
 }
 ```
 Создается объект input (типа `std::ifstream`) и иницализируется файлом "input.txt". Далее input ведет себя аналогично потоку std::cin. Те строка `input >> name;` просто записывает содержимое файла в строку name (как это сделал бы std::cin). Далее создается объект output (типа `std::ofstream`) и иницализируется файлом "output.txt". Теперь тут все аналогично действиями оператора std::cout, то теперь все записывает в файл, а не в терминал. Файл закроется, когда закороется ф-ция (и дулится объект output).
+
+## stringstream
+Объект, который позволяет работать со строками будто это поток.
+```cpp
+#include <sstream> // для std::stringstream
+
+int countWords(string str) 
+{ //ф-ция разбивает строку на отдельные слова и считает их кол-во
+    stringstream s(str);    // Used for breaking words 
+    string word;            // to store individual words 
+    
+    int count = 0; 
+    while (s >> word)       //считываем из stringstream как из потока (те отдельные элементы разделены пробелом)
+        count++;           
+    return count;           //вренм сколько было слов в строке
+} 
+```
+В начале создается объект типа `std::stringstream`, который инициализуется строкой (`stringstream s(str)`). Теперь его можно использовать аналогично потоку.   
+### Методы
+- operator `<<` — add a string to the stringstream object.
+- operator `>>` — read something from the stringstream object.
+- `clear()` — to clear the stream.
+- `str()` — to get and set string object whose content is present in stream.

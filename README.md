@@ -28,6 +28,8 @@
 	- std::cout
 		- форматирование вывода
 		- распадение в указатель при выводе
+	- files
+	- stringstream
 
 4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter4_Memory.md)
 	- Pointers

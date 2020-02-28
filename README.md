@@ -122,6 +122,7 @@
 		- Передача ф-ции в качестве параметра ф-ции
 		- Псевдонимы для указателей на ф-ции
 		- std::function
+	- Эллипсис (ellipsis) аргумент
 
 9. [**Chapter 9: Files and project magement**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter9_Files_and_project_manegment.md)
 	- Добавление файла в проект

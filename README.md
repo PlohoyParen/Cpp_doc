@@ -154,7 +154,7 @@
 		- методы
 		- vector по set (и наоборот)
 		- Оперции над множествами (сравнение и разница)
-13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/C-plus-documentation/blob/master/Documents/Chapter13_Exception_handling.md)
+13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/C-plus-documentation/blob/master/Documents/Chapter13_Exception_handling.md)     
 	- exit() и cerr
 	- assert и static_assert
 		- static_assert

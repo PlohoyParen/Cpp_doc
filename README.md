@@ -1,5 +1,5 @@
 # Ouline
-1. [**Chapter 1: General**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter1_General.md)     
+1. [**Chapter 1: General**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter1_General.md)     
 	- Понятия и термины    
 	- General structure  
 		- Вид типичного ситаксиса   
@@ -12,7 +12,7 @@
 		- Стек
 			- Последовательность заполнения стека
 
-2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter2_Operators.md)     
+2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter2_Operators.md)     
 	- Assiment and initialisation    
 	- Оператор запятая (,)    
 	- Тернарный if     
@@ -21,7 +21,7 @@
 		- cmath
 		- random number generator 
 		
-3. [**Chapter 3: Streams**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter3_Streams.md)   
+3. [**Chapter 3: Streams**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter3_Streams.md)   
 	- std::cin
 		- обработка некорректного ввода
 		- getline(cin, str)	
@@ -29,7 +29,7 @@
 		- форматирование вывода
 		- распадение в указатель при выводе
 
-4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter4_Memory.md)
+4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter4_Memory.md)
 	- Pointers
 		- Указатель * и &
 		- Scaling (Арифметика указателей)
@@ -48,7 +48,7 @@
 		- Memory leak
 		
 
-5. [**Chapter 5: Data types**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter5_Data_types.md)
+5. [**Chapter 5: Data types**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter5_Data_types.md)
 	- Basic data types
 		- Встроенные типы: размеры
 		- char
@@ -75,7 +75,7 @@
 		- Enumeration (enum) type
 	- Helpful functions
 	
-6.  [**Chapter 6: Classes**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter6_Classes.md)
+6.  [**Chapter 6: Classes**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter6_Classes.md)
 	 - Struct (public class)
 	 - Class
 	 	- Анатомия класса
@@ -83,7 +83,7 @@
 		- Вложенные классы и их scopes
 
 	
-7. [**Chapter 7: Control Flow**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter7_Flow_Control.md)
+7. [**Chapter 7: Control Flow**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter7_Flow_Control.md)
 	- Branches (Ветвление)
 		- is else
 		- Switch
@@ -94,7 +94,7 @@
 		- for
 		- while, while do
 
-8. [**Chapter 8: Functions**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter8_Functions.md)
+8. [**Chapter 8: Functions**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter8_Functions.md)
 	- Термины 
 	- Общее, main, void
 	- Прототип функции
@@ -119,13 +119,13 @@
 		- Псевдонимы для указателей на ф-ции
 		- std::function
 
-9. [**Chapter 9: Files and project magement**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter9_Files_and_project_manegment.md)
+9. [**Chapter 9: Files and project magement**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter9_Files_and_project_manegment.md)
 	- Добавление файла в проект
 	- header file (.h)
 	- Директивы препроцессора
 	- header guards
 	
-10. [**Chapter 10: Scopes**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter10_Scopes.md)
+10. [**Chapter 10: Scopes**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter10_Scopes.md)
 	- Scopes (Зоны видимости)
 		- Локальные переменные, глобальные переменные (static, extern) 
 		- сокрытие имен, глобальные ф-ции
@@ -133,13 +133,13 @@
 		- Глобальное пространство имен 
 		- :: и using
 		- Псевдонимы (вложение)
-11. [**Chapter 11: Algorithms lib**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter11_Algorithm_lib.md)
+11. [**Chapter 11: Algorithms lib**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter11_Algorithm_lib.md)
 	- count(begin, end, what) 
 	- sort(begin, end) 
 	- swap(a, b)
 	- set_difference(set1, set2, result)
 
-12. [**Chapter 12: std data types**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/Chapter12_std_data_types.md)
+12. [**Chapter 12: std data types**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter12_std_data_types.md)
 	- strings
 	- std::array
 	- vector
@@ -155,13 +155,13 @@
 		- методы
 		- vector по set (и наоборот)
 		- Оперции над множествами (сравнение и разница)
-13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/C-plus-documentation/blob/master/Documents/Chapter13_Exception_handling.md)     
+13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter13_Exception_handling.md)     
 	- exit() и cerr
 	- assert и static_assert
 		- static_assert
 		- Debuger vs release (NDEBUG)
 		
-50. [**Chapter X: Other**](https://github.com/PlohoyParen/Code_C_plus/blob/master/Documents/ChapterX_Other.md)
+50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
 	- Использование слова static
 		- Global scope
 		- Class 

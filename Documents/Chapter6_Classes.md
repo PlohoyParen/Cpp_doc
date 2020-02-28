@@ -32,6 +32,13 @@ vasya.lastname = 'Pupkin';
 vasya.age = 32;
 
 /* 2й способ: инициализация структуры с параметрами */
+struct Employee
+{
+    short id;
+    int age;
+    float salary = 0.0;
+};
+
 Person john = { 5, 27, 45000.0 }; // john.id = 5, john.age = 27, john.salary = 45000.0
 Person james = { 6, 29}; // james.id = 6, james.age = 29, james.salary = 0.0 (инициализация по умолчанию)
 

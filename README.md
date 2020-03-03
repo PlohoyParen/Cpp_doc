@@ -127,8 +127,10 @@
 9. [**Chapter 9: Files and project magement**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter9_Files_and_project_manegment.md)
 	- Добавление файла в проект
 	- header file (.h)
-	- Директивы препроцессора
-	- header guards
+		- Директивы препроцессора
+		- header guards
+	- Рефакторинг классов
+		- Область принадлежности (::)
 	
 10. [**Chapter 10: Scopes**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter10_Scopes.md)
 	- Scopes (Зоны видимости)

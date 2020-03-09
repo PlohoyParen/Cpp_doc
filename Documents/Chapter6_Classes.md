@@ -999,3 +999,129 @@ int main()
 ```
 - Поскольку статические методы не привязаны к объекту, то они не имеют скрытого указателя `*this`! Здесь есть смысл, так как указатель `*this` всегда указывает на экземпляр, с которым работает метод. Статические методы могут не работать через экземпляр, поэтому и указатель `*this` не имеет смысла.
 - Статические методы могут напрямую обращаться к другим статическим членам (переменным или функциям), но не могут к нестатическим членам. Это связано с тем, что нестатические члены принадлежат объекту класса, а статические методы — нет!
+
+## friend (дружественные класса и ф-ции)
+**Дружественная функция** — это функция, которая имеет доступ к закрытым членам класса, как если бы она сама была членом этого класса. Во всех других отношениях дружественная функция является обычной функцией. Ею может быть как обычная функция, так и метод другого класса. Для объявления дружественной функции используется ключевое слово `friend` перед прототипом функции, которую вы хотите сделать дружественной классу. Неважно, объявляете ли вы её в public или в private зоне класса. 
+```cpp
+class Anything
+{
+private:
+    int m_value;
+public:
+    Anything() { m_value = 0; } 
+    void add(int value) { m_value += value; }
+ 
+    // Делаем функцию reset() дружественной классу Anything
+    friend void reset(Anything &anything);
+};
+ 
+// reset() теперь является другом класса Anything
+void reset(Anything &anything)
+{
+    // И мы имеем доступ к закрытым членам объектов класса Anything
+    anything.m_value = 0;
+}
+ 
+int main()
+{
+    Anything one;
+    one.add(4); // добавляем 4 к m_value
+    reset(one); // сбрасываем m_value к 0
+ 
+    return 0;
+}
+```
+
+### Дружественные функции и несколько классов
+Функция может быть другом сразу для нескольких классов. Например,
+```cpp
+class Humidity; 
+ 
+class Temperature
+{
+private:
+    int m_temp;
+public:
+    Temperature(int temp=0) { m_temp = temp; }
+ 
+    friend void outWeather(const Temperature &temperature, const Humidity &humidity);
+};
+ 
+class Humidity
+{
+private:
+    int m_humidity;
+public:
+    Humidity(int humidity=0) { m_humidity = humidity; }
+ 
+    friend void outWeather(const Temperature &temperature, const Humidity &humidity);
+};
+ 
+void outWeather(const Temperature &temperature, const Humidity &humidity)
+{
+    std::cout << "The temperature is " << temperature.m_temp <<
+       " and the humidity is " << humidity.m_humidity << '\n';
+}
+ 
+int main()
+{
+    Temperature temp(15);
+    Humidity hum(11);
+ 
+    outWeather(temp, hum);
+ 
+    return 0;
+}
+```
+Тут надо отметить, что важно внчале указать прототип класса идущего не первым (тут `class Humidity;`) тк при первом упоминании ф-ции в первом классе компилятор зайдет в нее и увидет, что там ссылаются на необъявленный класс. Он будет недоволен.
+
+### Дружественные классы
+Один класс можно сделать дружественным другому классу. Это откроет всем членам первого класса доступ к закрытым членам второго класса. Например, 
+```cpp
+class Values
+{
+private:
+    int m_intValue;
+    double m_dValue;
+public:
+    Values(int intValue, double dValue)
+    {
+        m_intValue = intValue;
+        m_dValue = dValue;
+    }
+ 
+    // Делаем класс Display другом класса Values
+    friend class Display;
+};
+ 
+class Display
+{
+private:
+    bool m_displayIntFirst;
+ 
+public:
+    Display(bool displayIntFirst) { m_displayIntFirst = displayIntFirst; }
+ 
+    void displayItem(Values &value)
+    {
+        if (m_displayIntFirst)
+            std::cout << value.m_intValue << " " << value.m_dValue << '\n';
+        else // или сначала выводим double
+            std::cout << value.m_dValue << " " << value.m_intValue << '\n';
+    }
+};
+ 
+int main()
+{
+    Values value(7, 8.4);
+    Display display(false);
+ 
+    display.displayItem(value);
+ 
+    return 0;
+}
+```
+На самом деле, даже если Display является другом Values, это не означает, что Values также является другом Display. Если вы хотите сделать оба класса дружественными, то каждый из них должен указать в качестве друга противоположный класс. Наконец, если класс A является другом B, а B является другом C, то это не означает, что A является другом C.    
+
+#### Дружественные методы (вместо целого класса)
+Вообще делать классы дружественными - это плохая идея (ломает всю инкапсуляцию). Если все же надо, что какой-то из методов одного класса мог добраться до закрытых методов другого класса, то лучше использовать дружественные методы.  Лучшим решением было бы поместить каждое определение класса в отдельный заголовочный файл с определениями методов в соответствующих файлах .cpp. Таким образом, все определения классов стали бы видны сразу во всех файлах .cpp. В этом случаии объявление будет аналогичным примеру сверху, только вместо `friend class Display;` будет `friend void Display::displayItem(Values& value);` (те только нужный нам метод).

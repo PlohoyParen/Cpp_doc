@@ -516,6 +516,42 @@ int main()
 }
 ```
 
+### Вложенные enum
+```cpp
+enum FruitList
+{
+	AVOCADO,
+	BLACKBERRY,
+	LEMON
+};
+ 
+class Fruit
+{
+private:
+	FruitList m_type;
+public:
+ 	Fruit(FruitList type) :
+		m_type(type)
+	{
+	}
+ 
+	FruitList getType() { return m_type;  }
+};
+ 
+int main()
+{
+	Fruit avocado(AVOCADO);
+	
+	if (avocado.getType() == AVOCADO)
+		std::cout << "I am an avocado!";
+	else
+		std::cout << "I am not an avocado!";
+	
+	return 0;
+}
+```
+Надо отметить, что следующие обращение к enum из данного класса будут эквивалентны: `Fruit::FruitList::AVOCADO` и `Fruit::AVOCADO`. Однако в случаи вложенных классов надо указавать полный путь пространств: `Snake::Segment::Somthing`.
+
 ### Вложенные классы
 Одни классы могут содержать другие классы в качестве переменных-членов. По умолчанию, при создании внешнего класса, для переменных-членов будут вызываться конструкторы по умолчанию. *Это произойдёт до того, как тело конструктора выполнится*. 
 

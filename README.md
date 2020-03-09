@@ -11,6 +11,7 @@
 	- Сегментация памяти в C++
 		- Стек
 			- Последовательность заполнения стека
+	- Проблемы неоднозначности кода
 
 2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter2_Operators.md)     
 	- Assiment and initialisation    
@@ -59,6 +60,7 @@
 		- nan и inf
 		- constants
 		- auto
+	- Анонимные переменные
 	- Преобразование типов
 		- Неявное и явное преобразование данных
 	

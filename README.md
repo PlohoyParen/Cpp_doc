@@ -49,7 +49,8 @@
 		- Когда следует выделять память в куче (динамически)
 		- исключение bad_alloc
 		- Memory leak
-		
+	- void * или история про злого близница
+			
 
 5. [**Chapter 5: Data types**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter5_Data_types.md)
 	- Basic data types

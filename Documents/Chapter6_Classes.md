@@ -1,7 +1,13 @@
 # Chapter 6 Class
 ## Общее
 ### Initialization
-Если мы инициализируем объект класса внутри объявления другого класса (class definition), мы не можем использовать direct initialization (например, `Vec2 pos(400.0f, 300.f)`), хотя в обычном случаии (вне объявления класса) это сделать можно. В этом случаии надо воспользоваться либо 1) uniform initializaton, либо 2) через анонимный объект: 
+Если мы инициализируем объект класса внутри объявления другого класса (class definition), мы не можем использовать direct initialization (например, `Vec2 pos(400.0f, 300.f)`), хотя в обычном случаии (вне объявления класса) это сделать можно. В этом случаии надо воспользоваться либо 1) uniform initializaton, либо 2) через анонимный объект: we first create a anonymous object of class Vec2 (right hand side) and then assign it to Vec2 pos, initialized by default constructor (left hand side). 
+```cpp
+//inside Dude class
+  Vec2 pos(400.0f, 300.0f); 		// ERROR! direct initialization
+  Vec2 pos(400.0f, 300.0f); 		// 1)OK! uniform initializaton
+  Vec2 pos = Vec2(400.0f, 300.0f);	// 2)OK! через анонимный объект
+```
 
 ## Struct (a public class)
 Essentially, it is a class but less secure, since:

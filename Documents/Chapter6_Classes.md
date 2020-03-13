@@ -1,4 +1,8 @@
 # Chapter 6 Class
+## Общее
+### Initialization
+Если мы инициализируем объект класса внутри объявления другого класса (class definition), мы не можем использовать direct initialization (например, `Vec2 pos(400.0f, 300.f)`), хотя в обычном случаии (вне объявления класса) это сделать можно. В этом случаии надо воспользоваться либо 1) uniform initializaton, либо 2) через анонимный объект: 
+
 ## Struct (a public class)
 Essentially, it is a class but less secure, since:
 1. Members of a class are private by default and members of a struct are public by default.

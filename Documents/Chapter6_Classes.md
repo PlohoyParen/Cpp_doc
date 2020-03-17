@@ -526,7 +526,9 @@ public:
         // Часть кода X
     }
  
-    Boo(int value): Boo() // используем конструктор по умолчанию Boo() для выполнения части кода X
+    Boo(int value)
+    	:
+    	Boo() // используем конструктор по умолчанию Boo() для выполнения части кода X
     {
         // Часть кода Y
     }
@@ -553,7 +555,9 @@ public:
     }
  
     // Используем делегирующие конструкторы для сокращения дублированного кода
-    Employee(const std::string &name) : Employee(0, name) { }
+    Employee(const std::string &name) 
+    	: 
+	Employee(0, name) { }
 };
  
 int main()

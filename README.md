@@ -195,12 +195,6 @@
 		- vector по set (и наоборот)
 		- Оперции над множествами (сравнение и разница)
 		
-13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter13_Exception_handling.md)   
-	- Вася exit() и cerr   
-	- assert и static_assert
-		- static_assert
-		- Debuger vs release (NDEBUG)
-		
 14. [**Chapter 14: Operator overloading**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter14_Operator_overload.md)
 	- Перегразка через обычные ф-ции
 		- Перегрузка через дружественные ф-ции
@@ -213,6 +207,12 @@
 	- Перегрузка операторов сравнения
 	- Перегрузка инкремента и декремента
 	- Перегрузка операторов ввода и вывода
+
+13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter13_Exception_handling.md) 
+	- exit() и cerr   
+	- assert и static_assert
+		- static_assert
+		- Debuger vs release (NDEBUG)
 		
 50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
 	- Использование слова static

@@ -14,7 +14,8 @@
 	- Проблемы неоднозначности кода
 
 2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter2_Operators.md)     
-	- Assiment and initialisation    
+	- Assiment and initialisation
+	- Виды инициализации: прямая, uniform, копирующая
 	- Оператор запятая (,)    
 	- Тернарный if     
 	- Math    

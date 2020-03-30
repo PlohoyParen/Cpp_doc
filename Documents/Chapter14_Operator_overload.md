@@ -1,5 +1,4 @@
-
---\-111111111111111111111111111111111# Chapter14 Operator overload
+# Chapter14 Operator overload
 Главное, что надо знать о перегрузке операторов - это то, что оператор можно перегрузить только, если хотя бы один из операндов - пользовательский тип. Например, можно перегрузить class Smth + int, но нельзя перегрузить int + int. Так классы это практически (?) едиственный сбособ создания пользовательских типов, то перегрузка в основном нужна для классов. Отсюда происходят 2 способа перегрузки:
 1. Через внешние (обычные) ф-ции (или дружественные, если нужен доступ к скрытым членам)
 3. Через ф-ции класса
@@ -85,5 +84,76 @@ int main()
 }
 ```
 Главное **удобство использования перегрузки через обычные/дружественные ф-ции - это симетрия**: те можно легко менять местами левый и правый операнды: `operator+(class Smth one, int two)` и `operator+(int two, class Smth one)`.
+### Когда лучше использовать
+- Для перегрузки бинарных операторов, которые не изменяют левый операнд (например, operator+).
 
 ## Перегрузка через метод класса
+В этом случаи нужно указывать только **левый операнд**, так как правый это указатель на данный экземпляр (`*this`): видим `operator+(int a)`, читаем `operator+(*this, int a)`. Например,
+```cpp
+class Dollars
+{
+private:
+    int m_dollars;
+public:
+    Dollars(int dollars) { m_dollars = dollars; }
+    // Выполняем Dollars + int
+    Dollars operator+(int value);
+};
+// Примечание: Эта функция является методом класса!
+// Вместо параметра dollars в перегрузке через дружественную функцию здесь неявный параметр, на который указывает указатель *this
+Dollars Dollars::operator+(int value)
+{
+    return Dollars(m_dollars + value);
+}
+ 
+int main()
+{
+	Dollars dollars1(7);
+	Dollars dollars2 = dollars1 + 3; 
+	return 0;
+```
+Так как правый операнд всегда будет `*this`, то перегрузка симметричных операторов (например, class+int и int+class) будет невозможна.
+### Как перегрузить симетричный оператор не теряя инкапсуляции 
+**Использовать `friend` внутри класса** 
+```cpp
+class Integral
+{
+public:
+  Integral() = default;
+  Integral(const int value) : value{value}{};
+
+  friend auto operator+(const int left, const Integral& right) -> Integral
+  {
+    return Integral{left + right.value};
+  }
+
+private:
+  int value{};
+};
+```
+**Делать явное преобразование нужного типа в класс**    
+Вместо int+class,  int->class и class+class:    
+```cpp
+class Integral
+{
+public:
+  Integral() = default;
+  Integral(const int value) : value{value}{};
+
+  auto operator+(const Integral& right) const -> Integral
+  {
+    return Integral{value + right.value};
+  }
+
+private:
+  int value{};
+};
+
+auto x = Integral{12};
+auto result1 = x + 2; // works
+auto result2 = 2 + x; // also works
+```
+### Когда лучше использовать
+- Для операторов присваивания (=), индекса ([]), вызова функции (()) или выбора члена (->).
+- Для унарных операторов (например, ! или -).
+- Для перегрузки бинарных операторов, которые изменяют левый операнд (например, operator+=).

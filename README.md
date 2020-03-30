@@ -200,6 +200,19 @@
 		- static_assert
 		- Debuger vs release (NDEBUG)
 		
+14. [**Chapter 14: Operator overloading**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter14_Operator_overload.md)
+	- Перегразка через обычные ф-ции
+		- Перегрузка через дружественные ф-ции
+		- Когда лучше использовать
+	- Перегрузка через методы класса
+		- Перегрузка симетричных операторов через методы класса
+		- Когда лучше использовать
+		- Создание цепочек операторов
+		- Перегрузка унарных операторов
+	- Перегрузка операторов сравнения
+	- Перегрузка инкремента и декремента
+	- Перегрузка операторов ввода и вывода
+		
 50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
 	- Использование слова static
 		- Global scope

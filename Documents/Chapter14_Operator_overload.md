@@ -201,3 +201,41 @@ public:
 	}
 }
 ```
+
+## Перегрузка операторов сравнения
+Тк операторы сравненения (`!=`, `==`, `<`, `<=` etc) - это бинарные оператор, то их имеет смысл реализовывать через обычные/дружественные ф-ции: если сраниваются объекты разных типов и нужна симмерия. Однако, если идет сравнение между объектами одного класса, то лучше использовать метод класса.
+```cpp
+class Dollars
+{
+private:
+    int m_dollars;
+public:
+    Dollars(int dollars) { m_dollars = dollars; }
+    //Опредилим эти операторы через дружественные ф-ции
+    friend bool operator> (const Dollars &d1, const Dollars &d2);
+    friend bool operator>= (const Dollars &d1, const Dollars &d2);
+    //А этм через методы классов. Тк в обоих случаях сравниваются класса, то не важно, что использовать
+    bool operator< (const Dollars &d2);
+    bool operator<= (const Dollars &d2);
+};
+ 
+bool operator> (const Dollars &d1, const Dollars &d2)
+{
+    return d1.m_dollars > d2.m_dollars;
+}
+ 
+bool operator>= (const Dollars &d1, const Dollars &d2)
+{
+    return d1.m_dollars >= d2.m_dollars;
+}
+//Не забыть Dollars:: тк это метод класса, определенный вне класса
+bool Dollars::operator< (const Dollars &d2)
+{
+    return m_dollars < d2.m_dollars;
+}
+ 
+bool Dollars::operator<= (const Dollars &d2)
+{
+    return m_dollars <= d2.m_dollars;
+}
+```

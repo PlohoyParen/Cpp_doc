@@ -227,6 +227,7 @@
 		- Присваивание по-умолчанию  
 		- Проблемы при работе с памятью  
 		- Самоприсваивание, возврат *this
+		- delete
 		
 50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
 	- Использование слова static

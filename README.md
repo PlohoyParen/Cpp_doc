@@ -1,6 +1,6 @@
 # Ouline
 1. [**Chapter 1: General**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter1_General.md)     
-	- Понятия и термины    
+	- Важные понятия и термины
 	- General structure  
 		- Вид типичного ситаксиса   
 		- Общий цикл написания программы

@@ -12,6 +12,7 @@
 		- Стек
 			- Последовательность заполнения стека
 	- Проблемы неоднозначности кода
+	- Связи между объектами в C++
 
 2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter2_Operators.md)     
 	- Assiment and initialisation

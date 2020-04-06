@@ -79,7 +79,11 @@
 	- C-style strings
 		-C-style string symbolic constants
 	- Enumeration
-		- Enumeration (enum) type
+		- Обычный перечислитель
+			- Scope, input/output, память
+		- enum classes
+		- Зачем это надо?
+		- Short enum
 	- Helpful functions
 	
 6.  [**Chapter 6: Classes**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter6_Classes.md)

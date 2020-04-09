@@ -240,6 +240,23 @@
 		- Самоприсваивание, возврат *this
 		- delete
 		
+15. [**Chapter 15: Inheritance**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_15_Inheritance.md)
+	- Общее
+	- Порядок построения дочерних классов
+		- Инициализация членов родительского класса при наследовании
+		- Цепочка наследований
+	- Спецификаторы наследования
+		- Спецификаторы доступа
+		- Типы наследований
+			- public 
+			- private
+			- protected
+			- Пример цепочки
+	- Переопределение методов родительского класса 
+		- Изменение спецификатора доступа при переопределении метода (и сокрытие метода)
+	- Множественное наследование
+		- Diamond of doom
+		
 50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
 	- Использование слова static
 		- Global scope

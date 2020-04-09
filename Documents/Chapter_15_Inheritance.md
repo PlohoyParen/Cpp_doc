@@ -368,5 +368,5 @@ class Teacher: public Human, public Employee
 На самом деле, надо избегать этот случай тк может могут возникнуть множество проблем. Например, проблема конфликта имен у родителських методов. Если у родителей совпали имена методов, а у Child его нет, то возникнет ошибка: компилятор не будет знать какому из родителей отдать предпочтение: он равны в иерархии наследования. 
 
 ### Diamond of doom
-![Diamond of doom](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Diamond_inheritance.png)
+![Diamond of doom](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Diamond_inheritance.png | width=100)
 Это проблема возникает, когда два родителя (B и C) наследуют от одного про родителя (D). И в итоге они все встречаются в Child классе (A), те он наследует прородителя дважды. 

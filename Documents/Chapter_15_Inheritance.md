@@ -223,5 +223,67 @@ class Child: public Parent // открытое наследование
 |:-------------------|:----------------------------------|
 | public | public |
 | private | недоступен |
-| protected | protected |
+| protected | protected |     
+
 Те, если Child унаследовал protected член через public наследование, то он так же может передать его следующему классу-наследнику (в цепочке наследования) как protected.
+
+#### private (закрытое наследование)
+При закрытом наследовании все члены родительского класса наследуются как закрытые. Это означает, что члены private остаются недоступными, а члены protected и public становятся private в дочернем классе (те, Child имеет к ним доступ, но нет доступа извне через экземпляры Child). 
+
+| Тип члена в Parent | Какой тип этот член имеет в Child |
+|:-------------------|:----------------------------------|
+| public | private |
+| private | недоступен |
+| protected | private |
+
+#### protected (ащищённое наследование)
+С защищённым наследованием, члены public и protected становятся protected, а члены private остаются недоступными.
+| Тип члена в Parent | Какой тип этот член имеет в Child |
+|:-------------------|:----------------------------------|
+| public | protected |
+| private | недоступен |
+| protected | protected |
+
+#### Пример цепочки
+```cpp
+class Parent
+{
+public:
+	int m_public;
+private:
+	int m_private;
+protected:
+	int m_protected;
+};
+
+class D2 : private Parent  // закрытое наследование
+{
+	// Закрытое наследование означает, что:
+	// члены m_public и m_protected становятся private в дочернем классе;
+	// члены m_private недоступен для дочернего класса.
+public:
+	int m_public2;
+private:
+	int m_private2;
+protected:
+	int m_protected2;
+};
+
+class D3 : public D2
+{
+	// Открытое наследование от D2 означает, что:
+	/* Члены из D2: */
+    // m_public2 остается public в D3 классе;
+    // m_private2 остается private в D3 классе;
+    // m_protected2 остается protected в D3 классе;
+    
+    /* Члены из Parent: */
+	// m_public, m_protected и m_private - недоступны в D3 
+public:
+	int m_public3;
+private:
+	int m_private3;
+protected:
+	int m_protected3;
+};
+```

@@ -244,6 +244,15 @@ class Child: public Parent // открытое наследование
 | private | недоступен |
 | protected | protected |
 
+#### Тип наследования по дефолту (без явного указания)
+Для структур дефолтный тип (без явного указания) наследования - `public`. Для классов дефолтный тип - `private`.
+```cpp
+class C : B 	// B private by default
+{ / ... / }; 
+struct S : B 	// B public by default
+{ / ... / }; 
+```
+
 #### Пример цепочки
 ```cpp
 class Parent

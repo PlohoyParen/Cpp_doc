@@ -14,7 +14,7 @@
 			- Static segment
 			- Stack segment
 				- Последовательность заполнения стека
-				- frame pointer
+				- frame pointer он же base pointer он же ebp
 	- Проблемы неоднозначности кода
 	- Связи между объектами в C++
 

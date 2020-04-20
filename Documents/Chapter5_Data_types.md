@@ -164,6 +164,8 @@ int main()
 
 ## Преобразование типов 
 Есть два типа преобразования типов данных в C++: неявное и явное.   
+
+### Неявные преобразования
 1. **Неявное преобразование данных** -компилятор автоматически преобразовывает данные, чтобы корректо с ними работать. Есть несколько уровней неявных (автоматических) преобразований:
 - **Числовое расширение** - это когда значение из одного типа данных конвертируется в другой тип данных побольше (по размеру и по диапазону значений). Так типы меньше, чем `int` (`bool`, `char`, `short int` (или просто `short`), включая их unsigned и signed версии) расширяется в `int`. Также `float` конвертируется в `double`. Например, 
 	```cpp
@@ -188,8 +190,8 @@ int main()
 	short b(2);
 	std::cout << a + b << std::endl; // тип данных в выражения (a + b) - double, при этом b будет конвертирован short -> double
 	```	
-2. **Явные преобразования**   
-**C-style cast** 
+### Явные преобразования   
+#### C style cast 
 ```cpp
 int i1 = 11;
 int i2 = 3;
@@ -197,12 +199,39 @@ float x = (float)i1 / i2;
 // или то же свмое
 float x = float(i1) / i2;
 ```
-Не рекомендуется использовать C-style т.к. он может помянть тип `const` переменных и все поломать.
-**static_cast**
+Не рекомендуется использовать C-style т.к. он может поломать тип `const` переменных и все поломать.
+#### C++ style cast
+##### static_cast
+Используется для преобразования базовых типов     
 ```cpp
 char c = 97;
 std::cout << static_cast<int>(c) << std::endl; // в результате выведется 97, а не 'a'
 ```
+##### reinterpret_cast
+Используется для преобразования указателе. **!Рекомендуется избегать**. В принципе, только преобразование к указателю на char безопасно, для других надо быть супер аккуратным.
+```cpp
+int a = 69;
+char* cptr = reinterpret_cast<char*>(&a);
+```
+
+##### Что C++ стандарт думает об этом
+The C++ standard guarantees the following:       
+`static_cast`ing a pointer to and from `void*` preserves the address. That is, in the following, `a`, `b` and `c` all point to the same address:
+```cpp
+int* a = new int();
+void* b = static_cast<void*>(a);
+int* c = static_cast<int*>(b);
+```
+     
+`reinterpret_cast` only guarantees that if you cast a pointer to a different type, and then reinterpret_cast it back to the original type, you get the original value. So in the following:
+```cpp
+int* a = new int();
+void* b = reinterpret_cast<void*>(a);
+int* c = reinterpret_cast<int*>(b);
+```
+`a` and `c` contain the same value, but the value of `b` is unspecified. (in practice it will typically contain the same address as a and c, but that's not specified in the standard, and it may not be true on machines with more complex memory systems.)
+
+For casting to and from `void*`, `static_cast` should be preferred.
 
 ## typedef (alias)
 `typedef double time_t;` - стейтмет позволяющтий использовать псевдоним (alias) для типа данных. Тип данных при этом остается тем же (в прим., `double`), но для удобства чтения/написания кода будет использлваться новое имя будто это новый тип (в прим.,`time_t`). Например,

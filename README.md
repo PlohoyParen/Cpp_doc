@@ -133,6 +133,7 @@
 		- Дружественные функции и несколько классов
 		- Дружественные классы
 	- void * или история про злого близница
+	- Circular dependency (and forward declaration)
 
 	
 7. [**Chapter 7: Control Flow**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter7_Flow_Control.md)

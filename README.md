@@ -42,6 +42,7 @@
 4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter4_Memory.md)
 	- Pointers
 		- Указатель * и &
+		- Размер
 		- Scaling (Арифметика указателей)
 		- null pointer
 		- const pointers and pointers to const
@@ -70,7 +71,8 @@
 	- Анонимные переменные
 	- Преобразование типов
 		- Неявное и явное преобразование данных
-	
+		- С style cast
+		- C++ style cast
 	- Regular arrays(фиксированные массивы)
 		- объявление с enum 
 		- Указатели и массивы

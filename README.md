@@ -267,6 +267,10 @@
 	- Множественное наследование
 		- Diamond of doom
 		
+49. 12. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
+	- chrono
+	- random
+
 50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
 	- Использование слова static
 		- Global scope

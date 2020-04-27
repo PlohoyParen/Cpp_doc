@@ -41,6 +41,7 @@
 		- Работа с файлом, как последовательностью символов char (Unformatted input)
 			- Методы
 		- State functions
+		- binary mode
 	- stringstream
 
 4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter4_Memory.md)

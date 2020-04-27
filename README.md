@@ -37,6 +37,10 @@
 		- форматирование вывода
 		- распадение в указатель при выводе
 	- files
+		- Работа с файлами, как с потоком (Formatted input)
+		- Работа с файлом, как последовательностью символов char (Unformatted input)
+			- Методы
+		- State functions
 	- stringstream
 
 4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter4_Memory.md)

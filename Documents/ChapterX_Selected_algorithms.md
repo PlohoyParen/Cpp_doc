@@ -1,5 +1,6 @@
 # Numerical integration
 ## Monte Carlo intergration
+- Работает не оч для одномерных интегралов. Хорошо для многомерных
 
 ## Romberg integration
 Реализация тройного интеграла методом Ромберга

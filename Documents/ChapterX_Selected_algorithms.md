@@ -3,7 +3,7 @@
 - Работает не оч для одномерных интегралов. Хорошо для многомерных
 
 ## Romberg integration
-Подробнее от алгоритме [тут](https://medium.com/100-days-of-algorithms/day-98-romberg-integration-16d8626a1340)
+Подробнее от алгоритме [тут](https://medium.com/100-days-of-algorithms/day-98-romberg-integration-16d8626a1340).    
 Реализация тройного интеграла методом Ромберга
 ```cpp
 #include <stdio.h>

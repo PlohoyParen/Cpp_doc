@@ -79,4 +79,4 @@ int main()
   #include <cuda.h>
   ```
   Нужно добавить либо первые 2, либо последнюю (cuda.h). Последняя старая бибилиотка (и она же была в туториалах). Если же добавить первые 2, то появиться подсветка индекса в VS и он перестанет ругаться но CUDA спецефический код.
-- Kernel. Вызов kernel имеет следующий ситаксис: `AddTwo <<<1, 1 >> > (d_a, d_b)`. Числа в `<<<n, m>>>`: n-number of thread blocks, m-number of threads in one block; 
+- Kernel. Вызов kernel имеет следующий ситаксис: `AddTwo <<<1, 1 >> > (d_a, d_b)`. Числа в `<<<n, m>>>`: n-number of thread blocks, m-number of threads in one block. Те тут мы вызываем kernel с 1 блоком и 1 потоком в блоке.

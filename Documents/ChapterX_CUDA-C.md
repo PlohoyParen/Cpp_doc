@@ -28,7 +28,14 @@ CPU имеет доступ к RAM (на ней он и считает, стэк
     }
   ```
 - `cudaFree(int* devPrt)` - высвобождает память на device соответвующую данному указателю.
-- ` cudaMemcpy(void* dest, void* src, sizeof(int), enum direction)` - ф-ция копирующая содержимое указателя src в указатель dest. Нужна для передачи данных с Host на device (и обратно). При этом надо указать направление передачи(enum direction): `cudaMemcpyHostToDevice` и `cudaMemcpyDeviceToHost`. На самом деле есть еще `cudaMemcpyHostToHost` и `cudaMemcpyDeviceToDevice`, но не оч понятно зачем.
+- ` cudaMemcpy(void* dest, void* src, sizeof(int), enum direction)` - ф-ция копирующая содержимое указателя src в указатель dest. Нужна для передачи данных с Host на device (и обратно). Копирует объект целиком, включая массивы (ориентируется по размеру). При этом надо указать направление передачи(enum direction): `cudaMemcpyHostToDevice` и `cudaMemcpyDeviceToHost`. На самом деле есть еще `cudaMemcpyHostToHost` и `cudaMemcpyDeviceToDevice`, но не оч понятно зачем. Аналогично, это ф-ция возвращает тип `cudaSuccess`, если все успешно скоприровано. 
+```cpp
+  if(cudaMemcpy(d_a, h_a, sizeof(int)*count, cudaMemcpyHostToDevice) != cudaSuccess)
+    {
+      std::cout << "Smth went wrong!";
+      cudaFree(d_a);
+    }
+  ```
   
 ### Threads, thread blocks and grid   
 <img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Software-Perspective_for_thread_block.jpg" alt = "CUDA_grid" width = 700 >     
@@ -122,5 +129,5 @@ int main()
 
 -----
 
-### Error "Display Driver has Stopped Working and has Recovered"
+### Error: "Display Driver has Stopped Working and has Recovered"
 Проблема связана с тем, что widows автоматически перезапускает драйвер GPU, если видеокарта не отвечает более 2сек. Те если мы выполняем программу на GPU дольше 2сек, то widows будет думать, что что-то посшло не так и перезагрузит драйвер. Нужно поменять найстройки регистров. Подробнее [тут](https://www.youtube.com/watch?v=8NtHDkUoN98&list=PLKK11Ligqititws0ZOoGk3SW-TZCar4dK&index=3). Обычно программа просто дропает выполнение kernel, а CPU продолжает работу доводя программу до завершения, так что проблема может быть не очевидна.

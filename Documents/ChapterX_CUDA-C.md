@@ -27,6 +27,15 @@ CPU имеет доступ к RAM (на ней он и считает, стэк
 ### Threads, thread blocks and grid   
 <img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Software-Perspective_for_thread_block.jpg" alt = "CUDA_grid" width = 700 >     
 
+- **Thread** - single execution unit that runs kernel on the GPU (те задействует 1 core). 
+- **Thread block** - collection of threads. All threads in the same block can communicate. Задействует 1 SMM (streaming multiprocessor) unit. Maximum threads per block is 1024;
+- **Grid** - a collection of thread blocks. So, we launch a kernel on a grid (in <<<n, m>>> we configure the grid). Maximum blocks per grid (per launch) is 2^32-1. Подробнее про спецификации для конкретных видеократ [тут](https://en.wikipedia.org/wiki/CUDA#Version_features_and_specifications).
+- `dim3` - data type состоящий из 3х int значений: x, y и z (они по дефолту равны 1). `dim3 data1(256); //x=256, y=1, z=1`, `dim3 data2(25, 60, 22); //x=25, y=60, z=22`. Обычно используется для создания grid.
+
+
+Таким образом, запуская следуюший kernel `somekernel<<<50, 1024>>>(..)`, мы зайдествуем 51200 threads (50 blocks with 1024 in each). Ограничения на кол-во threads per block сделано для того, чтобы один и тот же код работан на видеокартах разных поколений (см [тут](https://en.wikipedia.org/wiki/CUDA#Version_features_and_specifications), при разных compute capability спецификации остаются тема же). Так например, старая видиокарта вытянет только 5 blocks параллельно, а новая 20 блоков. При этом созадется очередь из блоков на выполнение. В итоге новая карта просчитает все быстрее, но не при этом не надо для нее менять код.
+
+
 ### Пример и общий workflow
 Ниже программа, которая складывает 2 числа на GPU (очень глупо и CPU, конечно, сделает это лучше).  
 ```cpp

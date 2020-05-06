@@ -7,7 +7,7 @@ CUDA - это специальное API для видеокарт NVIDIA. Хо�
 ### Термины
 **Host** - это CPU. Host is in control of the system RAM, disks and other devises.       
 **Device** - это GPU. It has its own RAM, and it can control only this RAM. It doesn't have access to system RAM, disks and other deivses.       
-**Kernel** - так называют ф-ции написаные на CUDA языке, которая выпоняется на GPU. Каждый kernel может выполняться параллельно на 100- 1000 threads. На kernel накладываются следующие ограничения:     
+**Kernel** - так называют ф-ции написаные на CUDA языке, которая выпоняется на GPU. Каждый kernel может выполняться параллельно на 100- 1000 threads. Пусть есть `SomeKernel<<<n, m>>> (...аргументы...)`. Числа в `<<<n, m>>>`(**launch configuration**): n-number of thread blocks, m-number of threads in one block. На kernel накладываются следующие ограничения:     
   1. No recursive kernels
   2. kernels always return void
   3. They can't use system memory (?)
@@ -24,6 +24,8 @@ CPU имеет доступ к RAM (на ней он и считает, стэк
 - `cudaFree(int* devPrt)` - высвобождает память на device соответвующую данному указателю.
 - ` cudaMemcpy(void* dest, void* src, sizeof(int), enum direction)` - ф-ция копирующая содержимое указателя src в указатель dest. Нужна для передачи данных с Host на device (и обратно). При этом надо указать направление передачи(enum direction): `cudaMemcpyHostToDevice` и `cudaMemcpyDeviceToHost`. На самом деле есть еще `cudaMemcpyHostToHost` и `cudaMemcpyDeviceToDevice`, но не оч понятно зачем.
   
+### Threads, thread blocks and grid   
+<img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Software-Perspective_for_thread_block.jpg" alt = "CUDA_grid" width = 100 >
 ### Пример и общий workflow
 Ниже программа, которая складывает 2 числа на GPU (очень глупо и CPU, конечно, сделает это лучше).  
 ```cpp

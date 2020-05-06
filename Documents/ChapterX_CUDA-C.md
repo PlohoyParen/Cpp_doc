@@ -25,7 +25,8 @@ CPU имеет доступ к RAM (на ней он и считает, стэк
 - ` cudaMemcpy(void* dest, void* src, sizeof(int), enum direction)` - ф-ция копирующая содержимое указателя src в указатель dest. Нужна для передачи данных с Host на device (и обратно). При этом надо указать направление передачи(enum direction): `cudaMemcpyHostToDevice` и `cudaMemcpyDeviceToHost`. На самом деле есть еще `cudaMemcpyHostToHost` и `cudaMemcpyDeviceToDevice`, но не оч понятно зачем.
   
 ### Threads, thread blocks and grid   
-<img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Software-Perspective_for_thread_block.jpg" alt = "CUDA_grid" width = 700 >
+<img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Software-Perspective_for_thread_block.jpg" alt = "CUDA_grid" width = 700 >     
+
 ### Пример и общий workflow
 Ниже программа, которая складывает 2 числа на GPU (очень глупо и CPU, конечно, сделает это лучше).  
 ```cpp

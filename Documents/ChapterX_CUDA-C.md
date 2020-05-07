@@ -150,6 +150,8 @@ int main()
 - Kernel. Вызов kernel имеет следующий ситаксис: `AddTwoMtx <<<size / 512 + 1, 512 >>> (dev_a, dev_b, size);`. Числа в `<<<n, m>>>`: n-number of thread blocks, m-number of threads in one block. 
 
 
+## GPU memory
+<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/CUDA-memory-model.gif" atl = "GPU_memory" width = 500 >
 
 
 ## Random number generator on GPU

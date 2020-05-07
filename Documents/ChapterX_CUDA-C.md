@@ -41,17 +41,27 @@ CPU имеет доступ к RAM (на ней он и считает, стэк
 <img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Software-Perspective_for_thread_block.jpg" alt = "CUDA_grid" width = 700 >     
 
 - **Thread** - single execution unit that runs kernel on the GPU (те задействует 1 core). 
-- **Thread block** - collection of threads. All threads in the same block can communicate. Задействует 1 SMM (streaming multiprocessor) unit. Maximum threads per block is 1024;
+- **Thread block** - collection of threads. All threads in the same block can communicate. Задействует 1 SMM (streaming multiprocessor) unit. Maximum threads per block is 512 (Compure capability before 1.3) and 1024 (... above 1.3);
 - **Grid** - a collection of thread blocks. So, we launch a kernel on a grid (in <<<n, m>>> we configure the grid). Maximum blocks per grid (per launch) is 2^32-1. Подробнее про спецификации для конкретных видеократ [тут](https://en.wikipedia.org/wiki/CUDA#Version_features_and_specifications).
-
 
 Таким образом, запуская следуюший kernel `somekernel<<<50, 1024>>>(..)`, мы зайдествуем 51200 threads (50 blocks with 1024 in each). Ограничения на кол-во threads per block сделано для того, чтобы один и тот же код работан на видеокартах разных поколений (см [тут](https://en.wikipedia.org/wiki/CUDA#Version_features_and_specifications), при разных compute capability спецификации остаются тема же). Так например, старая видиокарта вытянет только 5 blocks параллельно, а новая 20 блоков. При этом созадется очередь из блоков на выполнение. В итоге новая карта просчитает все быстрее, но не при этом не надо для нее менять код.
 
------
+#### Ограничения на размеры
+**Hardware Constraints**    
+Следующие ограничения на размер и состав grid введены NVIDIA:     
+1. Each block cannot have more than 512/1024 threads in total (Compute Capability 1.x or 2.x and later respectively)
+2. The maximum dimensions of each block are limited to [512,512,64]/[1024,1024,64] (Compute 1.x/2.x or later)
+3. Each block cannot consume more than 8k/16k/32k/64k/32k/64k/32k/64k/32k/64k registers total (Compute 1.0,1.1/1.2,1.3/2.x-/3.0/3.2/3.5-5.2/5.3/6-6.1/6.2/7.0)
+4. Each block cannot consume more than 16kb/48kb/96kb of shared memory (Compute 1.x/2.x-6.2/7.0)
 
-- `dim3` - data type состоящий из 3х int значений: x, y и z (они по дефолту равны 1). `dim3 data1(256); //x=256, y=1, z=1`, `dim3 data2(25, 60, 22); //x=25, y=60, z=22`. Обычно используется для создания и работы с grid. Например, все следующие структуры основаны на dim3: `threadIdx`, `blockIdx`, `blockDim`, `gridDim`.
+**Performance Tuning**    
+Вопрос оптимального выбора размера и состава grid - сложный и люди защищают PhD на эту тему.     
+Например, чтобы точно уместить все нужные вычисления можно задать размер блока следующим образом. Пусть на нужно сделать прогон из N шагов (например, for loop на N шагов). Пусть кол-во threads = 512. Тогда нужный размер блока будет = `N/512 + 1` (+ 1 для округления). Тогда вызов нашего kernel будет: `SomeKernel<<<N/512 + 1, 512>>>(..)`. 
+
 
 #### Thread handling 
+- `dim3` - data type состоящий из 3х int значений: x, y и z (они по дефолту равны 1). `dim3 data1(256); //x=256, y=1, z=1`, `dim3 data2(25, 60, 22); //x=25, y=60, z=22`. Обычно используется для создания и работы с grid. Например, все следующие структуры основаны на dim3: `threadIdx`, `blockIdx`, `blockDim`, `gridDim`.
+
 Each thread is an individual object, that has the following atributes:
 - `threadIdx` - Thread index within the block.
 - `blockIdx` - Block index within.

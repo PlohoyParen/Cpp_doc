@@ -36,6 +36,17 @@ float FrameTimer::Mark()
 ```
 Далее в .cpp игры создается экземпляр класса `FrameTimer ft`. При инициализации, замеряется время. Далее при каждом вызове `Mark()` замеряется время сейчас и находится разница между этим и прошлым ее вызовом (или инициализацией, если это первый вызов). Ф-ция возвращет разницу времени, те время цикла программы: `const float dt = ft.Mark();`.
 
+## time.h (для замеров времени)
+```cpp
+#include <time.h>
+
+clock_t time_req;
+time_req = clock();
+// делаем наше дело
+time_req = clock() - time_req;
+printf("Processor time taken for the integration: %f sec\n", (float)time_req / CLOCKS_PER_SEC);
+```
+
 ## random
 (повторенно из главы про математические операции)
 

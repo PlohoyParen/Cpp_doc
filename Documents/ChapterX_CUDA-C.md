@@ -152,7 +152,8 @@ int main()
 
 
 
-
+## Random number generator on GPU
+https://nidclip.wordpress.com/2014/04/02/cuda-random-number-generation/
 
 
 -----

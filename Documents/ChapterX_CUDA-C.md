@@ -64,7 +64,7 @@ CPU имеет доступ к RAM (на ней он и считает, стэк
 
 Each thread is an individual object, that has the following atributes:
 - `threadIdx` - Thread index within the block.
-- `blockIdx` - Block index within.
+- `blockIdx` - Block index within the grid.
 - `blockDim` - Block dimensions in threads.
 - `gridDim` - Grid dimentions in blocs.
 Эти атрибуты задают уникальность каждного thread. Часто вычисляют id для отдельных thread: 

@@ -2,7 +2,7 @@
 ## Основы
 В целом GPU нужны, чтобы быстро параллельно обрабатывать простые вычисления. Такие вычисления встречаются, например, при рендеринге. Мы рендерим фрейм сотни раз в секундку (60 frame это хорошо для игр, например). Каждый раз компьютер должен просчитать как и куда рансформируются точки (vertices) из которых состоят объекты в графике. Это просте вычисления, но их очень много. Так GPU делает простые вычисления параллельно. Сравнивая CPU и GPU получим у меня на ноуте (intel core i7 и GeForce960M) получим, что у CPU 4 гигогерцовых ядра, а у GPU 640 мегагерцовых ядер (для ноута mobile версия, для обычной GeForce960 - 1024 ядер). Отсюда, **GPU хорош для параллельных алгоритмов, а CPU для последовательных**.     
 
-CUDA - это специальное API для видеокарт NVIDIA. Хотя синтаксис аналогичен C/C++ с небольшими добавлениями, под капотом он реализован на PTX языке (Parallel Thread Execution (PTX, or NVPTX) - это псевдо-ассемблер разработанный NVIDIA), который потом переводтся в в бинарный код для GPU. Надо понимать, что это CUDA - это не библиотека для С/С++ - это считай что отдельный язык, который называется CUDA-C/C++. Для его реализации нужен специальный компилятор NVCC (не входит в стандартные пакеты IDE), а файлы с кодом имеют расширение `.CU` (в VS можно выставить опцию, что .CU файлы автоматически ассоциировались с NVCC компилятором).     
+CUDA - это специальное API для видеокарт NVIDIA. Хотя синтаксис аналогичен C/C++ с небольшими добавлениями, под капотом он реализован на PTX языке (Parallel Thread Execution (PTX, or NVPTX) - это псевдо-ассемблер разработанный NVIDIA), который потом переводтся в в бинарный код для GPU. Надо понимать, что это CUDA - это не библиотека для С/С++ - это считай что отдельный язык, который называется CUDA-C/C++. Для его реализации нужен специальный компилятор NVCC (не входит в стандартные пакеты IDE), а файлы с кодом имеют расширение `.CU` (в VS можно выставить опцию, что .CU файлы автоматически ассоциировались с NVCC компилятором). Вообще NVCC компилирует CUDA часть кода, а потом остальное передает на обычный C/C++ компилятор.
 
 ### Термины
 **Host** - это CPU. Host is in control of the system RAM, disks and other devises.       
@@ -75,40 +75,58 @@ int id = blockIdx.x*blockDim.x + threadIdx.x;
                                     
 
 ### Пример и общий workflow
-Ниже программа, которая складывает 2 числа на GPU (очень глупо и CPU, конечно, сделает это лучше).  
+Ниже программа, которая складывает почленно 2 матрицы на GPU (что-то типо "Hello, world" для CUDA).  
 ```cpp
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
 
-#include <iostream>
 #include <cuda.h>
 
-__global__ void AddTwo(int* a, int* b)
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <time.h>
+
+__global__ void AddTwoMtx(int* a, int* b, int size)
 {
-    *a += *b;
+    int id = blockIdx.x * blockDim.x + threadIdx.x;
+    a[id] += b[id];
 }
 
 int main()
 {
-//1
-    int a = 5;
-    int b = 10;
-    int* d_a, * d_b;
-//2
-    cudaMalloc(&d_a, sizeof(int));
-    cudaMalloc(&d_b, sizeof(int));
-//3
-    cudaMemcpy(d_a, &a, sizeof(int), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_b, &b, sizeof(int), cudaMemcpyHostToDevice);
-//4
-    AddTwo <<<1, 1 >> > (d_a, d_b);
-//5    
-    cudaMemcpy(&a, d_a, sizeof(int), cudaMemcpyDeviceToHost);
-//6    
-    cudaFree(d_a);
-    cudaFree(d_b);
-    
-    std::cout << a << std::endl;
+/* 1. На Host (на RAM) создаются нужные нам объекты  */
+    int size = 100000;
+    int* mtx_a = new int[size];
+    int* mtx_b = new int[size];
+    //заполнили их случайными числами
+    srand(time(NULL));
+    for (int i = 0; i < size; i++)
+    {
+        mtx_a[i] = rand() % 100;
+        mtx_b[i] = rand() % 100;
+    }
+
+/* 2. На Device выделятеся память достаточная для этих объектов */
+    int* dev_a, * dev_b;
+    cudaMalloc(&dev_a, sizeof(int) * size);
+    cudaMalloc(&dev_b, sizeof(int) * size);
+
+/* 3. Эти объекты копируются с Host на выделенный блок памяти на Device */    
+    cudaMemcpy(dev_a, mtx_a, sizeof(int) * size, cudaMemcpyHostToDevice);
+    cudaMemcpy(dev_b, mtx_b, sizeof(int) * size, cudaMemcpyHostToDevice);
+
+/* 4. Вызывается kernel */
+    AddTwoMtx <<<size / 512 + 1, 512 >>> (dev_a, dev_b, size);
+
+/* 5. Копируем измененные объекты с Device обратно на Host */
+    cudaMemcpy(mtx_a, dev_a, sizeof(int) * size, cudaMemcpyDeviceToHost);
+    cudaMemcpy(mtx_b, dev_b, sizeof(int) * size, cudaMemcpyDeviceToHost);
+
+/* 6. Высвобождаем память на Device */
+    cudaFree(dev_a);
+    cudaFree(dev_b);
+
     return 0;
 }
 ```
@@ -129,7 +147,7 @@ int main()
   #include <cuda.h>
   ```
   Нужно добавить либо первые 2, либо последнюю (cuda.h). Последняя старая бибилиотка (и она же была в туториалах). Если же добавить первые 2, то появиться подсветка индекса в VS и он перестанет ругаться но CUDA спецефический код.
-- Kernel. Вызов kernel имеет следующий ситаксис: `AddTwo <<<1, 1 >> > (d_a, d_b)`. Числа в `<<<n, m>>>`: n-number of thread blocks, m-number of threads in one block. Те тут мы вызываем kernel с 1 блоком и 1 потоком в блоке.
+- Kernel. Вызов kernel имеет следующий ситаксис: `AddTwoMtx <<<size / 512 + 1, 512 >>> (dev_a, dev_b, size);`. Числа в `<<<n, m>>>`: n-number of thread blocks, m-number of threads in one block. 
 
 
 

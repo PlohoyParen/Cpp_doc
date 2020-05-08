@@ -130,6 +130,7 @@
 		- Деструктор
 			- Идиома RAII 
 			- Порядок действий в деструкторе (инь и янь)
+			- Implicitly generated (or default) destructor
 		- Скрытый указатель *this ->
 		- Const методы
 			- mutable
@@ -140,6 +141,7 @@
 	- friend (дружественные класса и ф-ции)
 		- Дружественные функции и несколько классов
 		- Дружественные классы
+	- Special member functions (implicitly generated functions)
 	- void * или история про злого близница
 	- Circular dependency (and forward declaration)
 

@@ -109,6 +109,7 @@
 	 	- Анатомия класса
 		- Объявление методов вне класса
 		- Конструктор
+			- Implicitly generated (or default) constructor
 			- Default constructors
 			- Список инициализации членов класса
 			- Инициализация константы

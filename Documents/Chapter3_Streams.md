@@ -57,7 +57,7 @@ std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 ## std::cout
 `cout << endl;` - после вывода переведет на новую строку  
 
-### <iomanip> library
+### library <iomanip> 
 - **Precision**:  `std::setprecision(number);` 	
     ```cpp
     #include <iostream>

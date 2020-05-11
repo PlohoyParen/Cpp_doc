@@ -48,6 +48,12 @@ std::cin << num;    //  "420 blaze!" -> num = 420; остальное дальш
 std::ignore(1000, '\n');    //отчистит буфер от " blaze!"
 ```
 
+Вместо magic number для лимита, можно использовать максимально возможное число, используя библиотеку <limits>
+```cpp
+#include <limits>
+std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+```
+
 ## std::cout
 `cout << endl;` - после вывода переведет на новую строку  
 

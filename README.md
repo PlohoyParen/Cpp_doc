@@ -32,8 +32,11 @@
 3. [**Chapter 3: Streams**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter3_Streams.md)   
 	- std::cin
 		- обработка некорректного ввода
-		- getline(cin, str)	
+		- getline(cin, str)
+		- get(char)
+		- ignore(num, char)
 	- std::cout
+		- library <iomanip>
 		- форматирование вывода
 		- распадение в указатель при выводе
 	- files

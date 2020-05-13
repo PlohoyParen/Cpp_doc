@@ -113,9 +113,9 @@ std::cout << &a;	// a распадется в указатель, а потом 
 
 ## files
 In C++, files are mainly dealt by using three classes **fstream**, **ifstream**, **ofstream** available in `<fstream >`.
-`ofstream`: Stream class to write on files
-`ifstream`: Stream class to read from files
-`fstream`: Stream class to both read and write from/to files.
+- `ofstream`: Stream class to write on files
+- `ifstream`: Stream class to read from files
+- `fstream`: Stream class to both read and write from/to files.
 
 Есть два способа работы с этими классами. За их реализации отвечают разные ф-ции. 1) Как с потоками те используя операторы `<<` и `>>`. Как и в других потоках, объекты ввода/вывода разделены пробелом (те каждое слово). 2) Можно считывать по-символьно, те файл чиается/записывается по одному char раз.    
 

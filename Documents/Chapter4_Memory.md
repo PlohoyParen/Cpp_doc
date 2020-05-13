@@ -360,3 +360,25 @@ int value = 7;
 int *ptr = new int; // выделяем память
 ptr = &value; // старый адрес утерян - произойдёт утечка памяти
 ```
+
+### Тест на memory leak
+Утилита, помогающая выявить утечки. 
+```cpp
+/*необходимые библеотеки*/
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>  
+
+/*регулирует куда будут выводиться предупреждения, ошибки и тд*/
+_CrtSetReportMode( _CRT_WARN,_CRTDBG_MODE_FILE );
+_CrtSetReportFile( _CRT_WARN,_CRTDBG_FILE_STDERR );
+_CrtSetReportMode( _CRT_ERROR,_CRTDBG_MODE_FILE );
+_CrtSetReportFile( _CRT_ERROR,_CRTDBG_FILE_STDERR );
+_CrtSetReportMode( _CRT_ASSERT,_CRTDBG_MODE_FILE );
+_CrtSetReportFile( _CRT_ASSERT,_CRTDBG_FILE_STDERR );
+
+//TODO место для вашей программы
+
+/*сама ф-ция проверки. Нужно засуть ее в критических местах программы (например, в конце)*/
+_CrtDumpMemoryLeaks();
+```

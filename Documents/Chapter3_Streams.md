@@ -17,14 +17,6 @@ else
 ```
 Можно сделать `while(true){}`, где принимать `std::cin >> a;`, а затем проводить тест используя кусок кода выше. Тогда, если все ОК то данные пройдут, если не ОК, то буфер отчистится и пользователь введет данные еще раз.
 
-### getline(cin, str)
-The getline() function extracts characters from the input stream and appends it to the string object until the delimiting character is encountered. While doing so the previously stored value in the string object str will be replaced by the input string if any.
-```cpp
-string name; 
-cout << "Please enter your name: \n"; 
-getline(cin, name); 
-```
-
 ### get(char)
 Метод `cin.get()` принимает значения по-символьно.  `char c; cin.get(c);` - сохраняет полученный символ в переменную с. Если ввод закончен (и соотв. сin.get ничего не получает), то она возвращает `false`(поэтому ее удобно использовать в while и if). Также
 `cin.get()` (без указания символьной переменной) - принимает любое значение и никуда его не сохраянет (т.к. мы не передали ей переменную для этого), обычно так ее ставят в конце программы, чтобы терминал не закрылся сразу после завершения основного цикла программы. 
@@ -53,6 +45,28 @@ std::ignore(1000, '\n');    //отчистит буфер от " blaze!"
 #include <limits>
 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 ```
+
+## getline(input_stream, str)
+The getline() function extracts characters from the input stream and appends it to the string object until the delimiting character is encountered. While doing so the previously stored value in the string object str will be replaced by the input string if any.        
+
+На самом деле stream может быть любой input stream объект, например `cin`, file (`ifsteam`), `stringstream` и тд:      
+- Пример с `cin`:
+    ```cpp
+    string name; 
+    cout << "Please enter your name: \n"; 
+    getline(cin, name); 
+    ```
+- Пример с `ifstream`
+    ```cpp
+    std::fstream in( filename );
+    for( std::string line; std::getline( in,line ); )
+    {
+        if( line == "[Tile Size]" )
+        {
+            in >> tileSize;			
+        }
+    }
+    ```
 
 ## std::cout
 `cout << endl;` - после вывода переведет на новую строку  
@@ -119,7 +133,16 @@ In C++, files are mainly dealt by using three classes **fstream**, **ifstream**,
 
 Есть два способа работы с этими классами. За их реализации отвечают разные ф-ции. 1) Как с потоками те используя операторы `<<` и `>>`. Как и в других потоках, объекты ввода/вывода разделены пробелом (те каждое слово). 2) Можно считывать по-символьно, те файл чиается/записывается по одному char раз.    
 
-Путь до файла: по дефолту (когды мы явно не указываем путь) файлы открываются и сохраняются в папку с .exe программы (или в папку VS проекта), поэтому при запуске программы как .exe нужно убедиться, что она сможет их найти. 
+Путь до файла: по дефолту (когды мы явно не указываем путь) файлы открываются и сохраняются в папку с .exe программы (или в папку VS проекта), поэтому при запуске программы как .exe нужно убедиться, что она сможет их найти.      
+
+Следует проверять открылся ли файл корректро: 
+```cpp
+ofstream file("test.txt");
+if ( ! file.is_open() ) 
+{
+   cerr << "open error\n";
+}
+```
 
 ### 1. Работа с файлами, как с потоком (Formatted input)
 ```cpp
@@ -182,6 +205,28 @@ int main()
 - `seekp(int n)` and `seekp(int n, std::ios_base::pos)` (от Seek Put) - действует аналогично seekg, только для output файлов.
 - `tellp()`- возвращет int значение индекса записи в данный момент.
 - `close()` - закрывает output файл.
+
+### Типичный loop работы с файлом
+```cpp
+std::fstream in( filename );
+for( std::string line; std::getline( in,line ); )
+{
+	if( line == "[Tile Size]" )
+	{
+		in >> tileSize;			
+	}
+	else if( line == "[Board Dimensions]" )
+	{
+		in >> boardWidth >> boardHeight;
+	}
+	else if( line == "[Poison Amount]" )
+	{
+		in >> nPoison;
+	}
+}
+```
+- Цикл `for( std::string line; std::getline( in,line ); )` последовательно считывает строку за строкой и сохраняет в строку line. Тк файл (те объект `fstream`) - это поток, то каждый вызов getline() выводит 1 строке из потока.  
+- Внутри цикла идет проверка содержимого строки line. Если там лежит то, что нам надо, то мы сохраняем данные идещие слелом в потоке: `in >> tileSize`. Тк fstream - это поток, то оба оператора getline() и `in >>` считывают с потока (1й - целую строку, 2й - строку до пробела).
 
 ### State functions
 `ifstream` объекты имееют оператор перегрузки в bool (true если файл считался, false если нет). Поэтому можно напрямую провести проверку считался ли файл или нет:

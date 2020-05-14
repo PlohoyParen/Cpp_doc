@@ -92,7 +92,7 @@ int main()
 #include <vector>
  // Нет необходимости указывать длину при инициализации
 std::vector<int> array0; // векстор рамера 0
-std::vector<int> array1(n); // векстор рамера n, где n-comlile-time constant
+std::vector<int> array1(n); // векстор рамера n, где n - run-time переменная 
 std::vector<int> array2 = { 10, 8, 6, 4, 2, 1 }; // используется список инициализаторов для инициализации массива
 std::vector<int> array3 { 10, 8, 6, 4, 2, 1 }; // используется uniform инициализация для инициализации массива (начиная с C++11)
 

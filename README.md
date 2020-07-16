@@ -265,7 +265,7 @@
 		- Самоприсваивание, возврат *this
 		- delete
 		
-15. [**Chapter 15: Inheritance**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_15_Inheritance.md)
+15. [**Chapter 15: Inheritance**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter15_Inheritance.md)
 	- Общее
 	- Порядок построения дочерних классов
 		- Инициализация членов родительского класса при наследовании

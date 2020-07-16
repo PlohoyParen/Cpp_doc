@@ -284,6 +284,22 @@
 	- Множественное наследование
 		- Diamond of doom
 		
+16. [**Chapter 16: Virtual functions**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter16_Virtual_functions.md)
+	- Полиморфизм (и постановка задачи)
+		- Пример с ф-цией
+		- Пример с массивом
+	- Особенности использования виртуальных ф-ций
+		- Пример цепочки наследования
+		- Корректная перегрузка виртульных ф-ций
+			- Ковариантный тип возврата
+		- Порядок указания virtual
+		- Когда НЕ использовать virtual
+	- Final and override
+		- override
+		- final
+			- для ф-цйи и для класса
+	- Виртуальный деструктор
+	
 49. 12. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono
 	- random (и cstdlib)

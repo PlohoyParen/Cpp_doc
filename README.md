@@ -17,6 +17,8 @@
 				- frame pointer он же base pointer он же ebp
 	- Проблемы неоднозначности кода
 	- Связи между объектами в C++
+	- Раннее и позднее связывание ( Early binding and late binding )
+		
 
 2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter2_Operators.md)     
 	- Assiment and initialisation
@@ -300,7 +302,8 @@
 			- для ф-цйи и для класса
 	- Виртуальный деструктор
 	
-49. 12. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
+	
+49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono
 	- random (и cstdlib)
 

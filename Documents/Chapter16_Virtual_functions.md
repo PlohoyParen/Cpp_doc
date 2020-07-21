@@ -511,5 +511,35 @@ public:
     }
 };
 ```
-В этом случаии программист ожидает, что класс Copier будет иметь 1 PowerDevice наследуемую часть (1й рисунок). На самом же деле, родительские классы Printer и Scanner каждый сконструирует про одному PowerDevice для себя и получится, что у класса Copier будет 2 PowerDevice (2й рисунок).       
-<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/diamond-of-death-cpp.jpg" alt = "diomon_of_death" width = "1000" />
+В этом случаии программист ожидает, что класс Copier будет иметь 1 PowerDevice наследуемую часть (1й рисунок). На самом же деле, родительские классы Printer и Scanner каждый сконструирует по одному PowerDevice для себя и получится, что у класса Copier будет 2 PowerDevice (2й рисунок).       
+
+<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/diamond-of-death-cpp.jpg" alt = "diomon_of_death" width = "1000" />    
+
+Так, результатом следующего кода будет:
+```cpp
+int main()
+{
+    Copier copier(1, 2, 3);
+}
+/***
+PoweredDevice: 3
+Scanner: 1
+PoweredDevice: 3
+Printer: 2
+***/
+```
+Решением данного безобразия является **виртуальный базовый класс**. **Виртуальный базовый класс** — это класс, объект которого является общим для использования всеми дочерними классами.
+```cpp
+class PoweredDevice
+{//ваш код мог бы быть здесь};
+
+class Scanner: virtual public PoweredDevice
+{//ваш код мог бы быть здесь};
+ 
+class Printer: virtual public PoweredDevice
+{//ваш код мог бы быть здесь};
+ 
+class Copier: public Scanner, public Printer
+{//ваш код мог бы быть здесь};
+```
+Теперь, при создании класса Copier, мы получим только одну копию PoweredDevice, которая будет общей как для Scanner, так и для Printer (1й рисунок). 

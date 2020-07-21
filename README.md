@@ -303,8 +303,15 @@
 		- final
 			- для ф-цйи и для класса
 	- Виртуальный деструктор
-	
-	
+	- Виртуальные табилцы (virtual tables)
+		- 1. Виртуальные таблицы (VMT)
+		- 2. Скрытый указатель на виртуальную таблицу (vpointer)
+		- Виртуальные ф-ции медленнее обычных
+	- Абстрактные классы и Интерфейсы
+		- Абстрактные функции и абстрактные классы
+		- Интерфейсы
+		- Чистые виртуальные функции и виртуальная таблица
+		
 49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono
 	- random (и cstdlib)

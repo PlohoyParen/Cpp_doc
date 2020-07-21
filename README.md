@@ -285,7 +285,9 @@
 		- Изменение спецификатора доступа при переопределении метода (и сокрытие метода)
 	- Множественное наследование
 		- Diamond of doom
-		
+		- Виртуальный базовый класс
+			- Особенности 
+
 16. [**Chapter 16: Virtual functions**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter16_Virtual_functions.md)
 	- Полиморфизм (и постановка задачи)
 		- Пример с ф-цией

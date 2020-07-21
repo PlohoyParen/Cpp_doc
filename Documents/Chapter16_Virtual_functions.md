@@ -469,3 +469,47 @@ double mySqrt(double value, IErrorLog &log)
 ```
 ### Чистые виртуальные функции и виртуальная таблица
 Запись чистой виртуальной функции в виртуальной таблице обычно содержит либо нулевой указатель, либо указывает на общую функцию, которая выводит ошибку (иногда эта функция называется `__purecall`), если не было обнаружено переопределения.
+
+## Виртуальный базовый класс
+При образовании цепочки наследований может возникнуть ситуация "алмаз сметри": когда некоторый класс наследует от двух дочерних, которые имеют общего родителя. В этом случаии поведение класса непредсказуемо. Например:
+```cpp
+class PoweredDevice
+{
+public:
+    PoweredDevice(int power)
+    {
+		std::cout << "PoweredDevice: " << power << '\n';
+    }
+};
+ 
+class Scanner: public PoweredDevice
+{
+public:
+    Scanner(int scanner, int power)
+        : PoweredDevice(power)
+    {
+		std::cout << "Scanner: " << scanner << '\n';
+    }
+};
+ 
+class Printer: public PoweredDevice
+{
+public:
+    Printer(int printer, int power)
+        : PoweredDevice(power)
+    {
+		std::cout << "Printer: " << printer << '\n';
+    }
+};
+ 
+class Copier: public Scanner, public Printer
+{
+public:
+    Copier(int scanner, int printer, int power)
+        : Scanner(scanner, power), Printer(printer, power)
+    {
+    }
+};
+```
+В этом случаии программист ожидает, что класс Copier будет иметь 1 PowerDevice наследуемую часть (1й рисунок). На самом же деле, родительские классы Printer и Scanner каждый сконструирует про одному PowerDevice для себя и получится, что у класса Copier будет 2 PowerDevice (2й рисунок).
+<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/diamond-of-death-cpp.jpg" alt = "diomon_of_death" width = "300" />

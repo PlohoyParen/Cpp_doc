@@ -511,5 +511,5 @@ public:
     }
 };
 ```
-В этом случаии программист ожидает, что класс Copier будет иметь 1 PowerDevice наследуемую часть (1й рисунок). На самом же деле, родительские классы Printer и Scanner каждый сконструирует про одному PowerDevice для себя и получится, что у класса Copier будет 2 PowerDevice (2й рисунок).
-<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/diamond-of-death-cpp.jpg" alt = "diomon_of_death" width = "300" />
+В этом случаии программист ожидает, что класс Copier будет иметь 1 PowerDevice наследуемую часть (1й рисунок). На самом же деле, родительские классы Printer и Scanner каждый сконструирует про одному PowerDevice для себя и получится, что у класса Copier будет 2 PowerDevice (2й рисунок).       
+<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/diamond-of-death-cpp.jpg" alt = "diomon_of_death" width = "600" />

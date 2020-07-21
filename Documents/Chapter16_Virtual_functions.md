@@ -344,4 +344,4 @@ int main()
 }
 ```
 В этом случаии таблицы для классов B и C будут выглядеть следующим образом,
-< img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/vpointer.png" alt = "vpointer" width = 200 >
+<img src = "https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/vpointer.png" alt = "vpointer" width = "200" />

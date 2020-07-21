@@ -448,3 +448,83 @@ class Teacher: public Human, public Employee
 ### Diamond of doom
 <img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/Diamond_inheritance.png" alt="Diamond_of_doom" width="200"/>
 Это проблема возникает, когда два родителя (B и C) наследуют от одного про родителя (D). И в итоге они все встречаются в Child классе (A), те он наследует прородителя дважды. 
+
+### Виртуальный базовый класс
+При образовании цепочки наследований может возникнуть ситуация "алмаз сметри": когда некоторый класс наследует от двух дочерних, которые имеют общего родителя. В этом случаии поведение класса непредсказуемо. Например:
+```cpp
+class PoweredDevice
+{
+public:
+    PoweredDevice(int power)
+    {
+		std::cout << "PoweredDevice: " << power << '\n';
+    }
+};
+ 
+class Scanner: public PoweredDevice
+{
+public:
+    Scanner(int scanner, int power)
+        : PoweredDevice(power)
+    {
+		std::cout << "Scanner: " << scanner << '\n';
+    }
+};
+ 
+class Printer: public PoweredDevice
+{
+public:
+    Printer(int printer, int power)
+        : PoweredDevice(power)
+    {
+		std::cout << "Printer: " << printer << '\n';
+    }
+};
+ 
+class Copier: public Scanner, public Printer
+{
+public:
+    Copier(int scanner, int printer, int power)
+        : Scanner(scanner, power), Printer(printer, power)
+    {
+    }
+};
+```
+В этом случаии программист ожидает, что класс Copier будет иметь 1 PowerDevice в наследуемой части (1й рисунок). На самом же деле, родительские классы Printer и Scanner каждый сконструирует по одному PowerDevice для себя и получится, что у класса Copier будет 2 PowerDevice (2й рисунок).       
+
+<img src="https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/images/diamond-of-death-cpp.jpg" alt = "diomon_of_death" width = "1000" />    
+
+Так, результатом следующего кода будет:
+```cpp
+int main()
+{
+    Copier copier(1, 2, 3);
+}
+/***
+PoweredDevice: 3
+Scanner: 1
+PoweredDevice: 3
+Printer: 2
+***/
+```
+Решением данного безобразия является **виртуальный базовый класс**. **Виртуальный базовый класс** — это класс, объект которого является общим для использования всеми дочерними классами.
+```cpp
+class PoweredDevice
+{//ваш код мог бы быть здесь};
+
+class Scanner: virtual public PoweredDevice
+{//ваш код мог бы быть здесь};
+ 
+class Printer: virtual public PoweredDevice
+{//ваш код мог бы быть здесь};
+ 
+class Copier: public Scanner, public Printer
+{//ваш код мог бы быть здесь};
+```
+Теперь, при создании класса Copier, мы получим только одну копию PoweredDevice, которая будет общей как для Scanner, так и для Printer (1й рисунок). 
+
+#### Особенности
+1. В отличии от обычного наследования, тут конструктор виртуального базового класса вызывается самым дочерним классом, а нижлежащие классы игнорируют его у констрктор у себя. Те в нашем примере, при создании Copier коструктор Copier напрямую вызовет коструктор PowerDevice (это единственный случай, когда класс может вызывать конструтор чужого класса). При этом конструкторы Scanner и Printer не будут вызывать конструктор PowerDevice (хотя в обычном случаии вызвали бы). Важно отметить, что если бы мы создавали объекты класса Scanner или Printer, то конструктор PowerDevice вызывался бы по-нормальному.
+2. Самый дочерний класс вызывает конструктор виртуального базового класса. То если в нашем случаии Copier. Это работает даже в случае одиночного наследования: когда Copier наследует только Printer, а Printer виртуально наследует PoweredDevice, то Copier по-прежнему ответственный за создание PoweredDevice.
+3. Виртуальные базовые классы всегда создаются перед не виртуальными базовыми классами, что обеспечивает построение всех базовых классов до построения их производных классов.
+

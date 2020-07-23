@@ -528,3 +528,51 @@ class Copier: public Scanner, public Printer
 2. Самый дочерний класс вызывает конструктор виртуального базового класса. То если в нашем случаии Copier. Это работает даже в случае одиночного наследования: когда Copier наследует только Printer, а Printer виртуально наследует PoweredDevice, то Copier по-прежнему ответственный за создание PoweredDevice.
 3. Виртуальные базовые классы всегда создаются перед не виртуальными базовыми классами, что обеспечивает построение всех базовых классов до построения их производных классов.
 
+## Обрезка объектов (object slicing)
+Как упоминалось выше любой дочерний объект имеет родительскую и собственную части. Если указателю или ссылке на родителський класс присвоить объект дочернего класса, то этот указатель/ссылка будет указывать на родительскую часть дочернего класса (не создаст новый объект):
+```cpp
+class Parent
+{ //some code here };
+
+class Child: public Parent
+{ //some code here };
+
+int main()
+{	
+	Child ch;
+	Parent &par = ch;	//все ок
+	Parent *pptr = &ch;	//все ок
+}
+```
+Если скопировать объект типа Child в объект типа Parent, то скопируется только Parent часть. При этом возникнет проблема с тем, что объект потеряет указатель на виртуальную таблицу и, соответвенно, не сможет использовать виртуальные ф-ции. Например:
+```cpp
+class Parent
+{
+protected:
+    int m_value;
+public:
+    Parent(int value)
+        : m_value(value) 
+    {}
+    virtual const char* getName() const { return "Parent"; }
+    int getValue() const { return m_value; }
+};
+ 
+class Child: public Parent
+{
+public:
+    Child(int value)
+        : Parent(value)
+    {}
+    virtual const char* getName() const { return "Child"; }
+};
+
+int main()
+{
+    Child child(7);
+    Parent parent = child; // простое копирование (не указатель или ссылка) -> простое копирование -> невозможность вызвать виртуальную ф-цию 
+    std::cout << "parent is a " << parent.getName() << " and has value " << parent.getValue() << '\n';
+ 
+    return 0;
+}
+```

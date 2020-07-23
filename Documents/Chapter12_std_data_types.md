@@ -164,7 +164,50 @@ std::cout << "length: " << array.size() << "  capacity: " << array.capacity() <<
 - `array.back()` - возвращает последний элемент вектора
 - `array.push_back(n)` - присоединит n в конец вектора (append)
 - `array.pop_back(n)` - удаляет последний элемент вектора
-	
+
+### Обрезка вектора
+Вектор ограничен объектами одного класса, поэтому сложно реализовывать полиморфизм через вектор. Например, мы хотим сделать вектор на основе базового класса и вписывать туда наследников. Хотя это сработате для обычного array, но с вектором так не выйдет. В вектор будет записывать обрез дочернего класса (те копия родительской части), поэтому нельзя будет вызвать виртуальные ф-ции на объекты в этом векторе. Например:
+```cpp
+int main()
+{
+	std::vector<Parent> v;
+	v.push_back(Parent(7)); // добавляем объект класса Parent в наш вектор
+	v.push_back(Child(8)); // добавляем объект класса Child в наш вектор
+ 
+        // Выводим все элементы нашего вектора
+	for (int count = 0; count < v.size(); ++count)
+		std::cout << "I am a " << v[count].getName() << " with value " << v[count].getValue() << "\n";
+ 
+	return 0;
+}
+
+/*** Выведет 
+I am a Parent with value 7
+I am a Parent with value 8 // нельзя вызвать виртуальную ф-цию 
+***/
+```
+#### Решение 1
+Можно решить эту проблему записывая в вектор указатели на классы, и реализовывать всю работу через указатели (хотя это и неудобно):
+```cpp
+int main()
+{
+	std::vector<Parent*> v;
+	v.push_back(new Parent(7)); // добавляем объект класса Parent в наш вектор
+	v.push_back(new Child(8)); // добавляем объект класса Child в наш вектор
+ 
+        // Выводим все элементы нашего вектора
+	for (int count = 0; count < v.size(); ++count)
+		std::cout << "I am a " << v[count]->getName() << " with value " << v[count]->getValue() << "\n";
+ 
+	for (int count = 0; count < v.size(); ++count)
+		delete v[count];
+ 
+	return 0;
+}
+```
+#### Решение 2
+Использовать специальный класс-обертку ` std::reference_wrapper` (`#include <functional>`).
+
  ## map и unordered_map
  ```cpp
  #include <map>

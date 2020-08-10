@@ -147,10 +147,11 @@
 		- Static
 			- Static переменные класса
 			- Static методы
+	- Special member functions (implicitly generated functions)
 	- friend (дружественные класса и ф-ции)
 		- Дружественные функции и несколько классов
 		- Дружественные классы
-	- Special member functions (implicitly generated functions)
+		- Does "friend" violate encapsulation?
 	- void * или история про злого близница
 	- Circular dependency (and forward declaration)
 
@@ -314,6 +315,7 @@
 		- Абстрактные функции и абстрактные классы
 		- Интерфейсы
 		- Чистые виртуальные функции и виртуальная таблица
+	- Перегрузка потоков ввода и вывода
 		
 49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono

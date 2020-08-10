@@ -1492,6 +1492,22 @@ int main()
 #### Дружественные методы (вместо целого класса)
 Вообще делать классы дружественными - это плохая идея (ломает всю инкапсуляцию). Если все же надо, что какой-то из методов одного класса мог добраться до закрытых методов другого класса, то лучше использовать дружественные методы.  Лучшим решением было бы поместить каждое определение класса в отдельный заголовочный файл с определениями методов в соответствующих файлах .cpp. Таким образом, все определения классов стали бы видны сразу во всех файлах .cpp. В этом случаии объявление будет аналогичным примеру сверху, только вместо `friend class Display;` будет `friend void Display::displayItem(Values& value);` (те только нужный нам метод).
 
+### Does "friend" violate encapsulation?
+Источник [Страуструп FAQ](https://www.stroustrup.com/bs_faq2.html#friend).      
+**Does "friend" violate encapsulation?**      
+No. It does not. "Friend" is an explicit mechanism for granting access, just like membership. You cannot (in a standard conforming program) grant yourself access to a class without modifying its source. For example:
+```cpp
+class X 
+{
+	int i;
+public:
+	void m();		// grant X::m() access
+	friend void f(X&);	// grant f(X&) access
+	// ...
+};
+void X::m() { i++; /* X::m() can access X::i */ }
+void f(X& x) { x.i++; /* f(X&) can access X::i */ }
+```
 
 ## void * или история про злого близница
 Существует такая уезвимость у закрытых членов классов/структур: доступ к ним можно получить через злого близница.   

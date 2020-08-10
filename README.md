@@ -287,6 +287,9 @@
 		- Diamond of doom
 		- Виртуальный базовый класс
 			- Особенности 
+	- Обрезка объектов (object slicing)
+	- dynamic_cast и static_cast
+		- dynamic vs static
 
 16. [**Chapter 16: Virtual functions**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter16_Virtual_functions.md)
 	- Полиморфизм (и постановка задачи)

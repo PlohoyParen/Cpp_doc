@@ -535,3 +535,47 @@ Child
 1. В этом случаии вызывается Parent версия метода print, как и ожидалось.
 2. При передаче ссылки на объект класса Child в ф-цию потока (`<<`) проиходит неявное преобразование Child->Parent. Далее вызывается метод print, однако тк он является виртуальным, то вызов переходет к дочерней версии.
 3. Все произойдет аналогично случаю 2, только без неявного преобразования Child->Parent
+
+## Как "докапаться" до содержимого виртуальной таблицы
+Несмотря на то, что все классы, имеющие виртуальные ф-ции, содержат указатель на виртуальную таблицу, компилятор запрещает доступ к нему. Можно исхитриться и вынуть его (работает не на всех компиляторах). Так как он идет первым полем находящимся по адресу объекта, то можно преобразовать в `*int` содержимое этого поля (те первые `sizeof(int)` лежащие по адресу объекта): `int* vptr =  *(int**)obj;`. Полный разбор что и почему [тут](https://kaisar-haque.blogspot.com/2008/07/c-accessing-virtual-table.html).
+```cpp
+#include <iostream>
+
+using namespace std;
+
+//a simple class
+class X
+{
+public:
+//fn is a simple virtual function
+virtual void fn()
+{
+  cout << "n = " << n << endl;
+}
+//a member variable
+int n;
+};
+
+int main()
+{
+//create an object (obj) of class X
+X *obj = new X();
+obj->n = 10;
+
+//get the virtual table pointer of object obj
+int* vptr =  *(int**)obj;
+
+// we shall call the function fn, but first the following assembly code
+//  is required to make obj as 'this' pointer as we shall call
+//  function fn() directly from the virtual table
+__asm
+{
+	mov ecx, obj
+}
+//function fn is the first entry of the virtual table, so it's vptr[0]	
+( (void (*)()) vptr[0] )();
+//the above is the same as the following
+//obj->fn();
+return 0;
+}
+```

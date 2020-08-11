@@ -293,6 +293,7 @@
 		- dynamic vs static
 
 16. [**Chapter 16: Virtual functions**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter16_Virtual_functions.md)
+	- Перегрузка (overload) vs переопределение (override)
 	- Полиморфизм (и постановка задачи)
 		- Пример с ф-цией
 		- Пример с массивом

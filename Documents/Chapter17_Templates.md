@@ -43,30 +43,28 @@ const T& max(const T& a, const T& b)
  
 int main()
 {
-    int i = max(4, 8);      /* на самом деле тут стоит 
-                            const int& max(const int& a, const int& b)
-                            {
-                                return (a > b) ? a : b;
-                            }
-                            */
+    int i = max(4, 8);              /* на самом деле тут стоит 
+                                    const int& max(const int& a, const int& b)
+                                    {
+                                        return (a > b) ? a : b;
+                                    }
+                                    */
     std::cout << i << '\n';
  
-    double d = max(7.56, 21.434);
-    /* на самом деле тут стоит 
-    const double& max(const double& a, const double& b)
-    {
-        return (a > b) ? a : b;
-    }
-    */
+    double d = max(7.56, 21.434);   /* на самом деле тут стоит 
+                                    const double& max(const double& a, const double& b)
+                                    {
+                                        return (a > b) ? a : b;
+                                    }
+                                    */
     std::cout << d << '\n';
         
-    char ch = max('b', '9');
-    /* на самом деле тут стоит 
-    const ch& max(const ch& a, const ch& b)
-    {
-        return (a > b) ? a : b;
-    }
-    */
+    char ch = max('b', '9');        /* на самом деле тут стоит 
+                                    const ch& max(const ch& a, const ch& b)
+                                    {
+                                        return (a > b) ? a : b;
+                                    }
+                                    */
     std::cout << ch << '\n';
         
     return 0;

@@ -300,11 +300,9 @@ protected:
 	T m_array[size];
  
 public:
+	// Это шаблон статического массива, поэтому на не нужен конструктор и деструктор 
 	T* getArray() { return m_array; }
-	T& operator[](int index)
-	{
-		return m_array[index];
-	}
+	T& operator[](int index) { return m_array[index]; }
 	virtual void print()
 	{
 		for (int i = 0; i < size; i++)

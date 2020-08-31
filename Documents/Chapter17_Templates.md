@@ -233,3 +233,57 @@ public:
 - `class Repository<bool>` - конкретно указываем тип данных для данной явной реализации
 
 #### Частичная специализация
+Частичная специализация шаблона позволяет выполнить специализацию шаблона класса (но не функции!), где некоторые (но не все) параметры шаблона явно определены. В плане реализации все похоже на полную специализацию только вместо пустого template мы записываем переменные шаблона, которые не были опеределены явно. Например, 
+```cpp
+/* Общий шаблон */
+template <class T, int size> // size является параметром non-type шаблона
+class StaticArray
+{
+private:
+    // Параметр size отвечает за длину массива
+    T m_array[size]; 
+public:
+    T* getArray() { return m_array; }
+    T& operator[] (int index) { return m_array[index]; }
+    void print()
+    {
+        for (int i = 0; i < size; i++)
+            std::cout << m_array[i] << ' ';
+        std::cout << "\n";
+	}
+};
+
+/* Частично специализированный шаблон */
+template <int size> // убрали сlass T
+class StaticArray<double, size> //double указываем явно
+{
+private:
+    double m_array[size];
+public:
+    double* getArray() { return m_array; }
+    double& operator[](int index) { return m_array[index]; }
+ 
+    void print()
+    {
+        for (int i = 0; i < size; i++)
+            std::cout << std::scientific << m_array[i] << " ";
+        std::cout << "\n";
+	}
+};
+```
+- В `template <int size>` указываются только переменные шаблона. То, что явно специализируктся (в нашем случаии `class T`) убираем. 
+- В названии шаблона (`class StaticArray<double, size>`) перечисляем все данные: как специализируемые, так и общие переменные шаблона. 
+- Однако нельзя сделать частичную реализацию шаблона ф-ции. Например, для случая сверу *нельзя* определить поведение метода print подобным образом:
+    ```cpp
+    // Не сработает
+    template <int size>
+    void StaticArray<double, size>::print()
+    {
+        for (int i = 0; i < size; i++)
+            std::cout << std::scientific << m_array[i] << " ";
+        std::cout << "\n";
+    }
+
+    /* Однако НЕЛЬЗЯ частично сделать*/
+    ```
+    Нужно переопредеть весь шаблон класса целиком. 

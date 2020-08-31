@@ -301,7 +301,6 @@ protected:
  
 public:
 	T* getArray() { return m_array; }
- 
 	T& operator[](int index)
 	{
 		return m_array[index];
@@ -317,13 +316,7 @@ public:
 /* наследуем для дочернего общего шаблона (и его используем для общих случаем); */
 template <class T, int size> // size является параметром non-type шаблона
 class StaticArray: public StaticArray_Base<T, size>
-{
-public:
-	StaticArray()
-	{
- 
-	}
-};
+{};
 
 /* 3) наследуем для частичной специализации и специализируем дочерний класса, а в нем реализуем нужные нам методы */
 template <int size> // size является параметром non-type шаблона

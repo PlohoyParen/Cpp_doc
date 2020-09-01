@@ -80,10 +80,17 @@ struct Array {
 explicit Array ( SizeT size )
 	: data_ ( new Type [ size ])
 	, size_ ( size ) {}
-~ Array () { delete [] data_ ;}
-SizeT size () const { return size_ ;}
-CRet operator []( SizeT i) const { return data_ [i ]; }
-Type & operator []( SizeT i ) { return data_ [i ]; }
+~ Array ()
+{ delete [] data_ ;}
+
+SizeT size () const 
+{ return size_ ;}
+
+CRet operator []( SizeT i) const 
+{ return data_ [i ]; }
+
+Type & operator []( SizeT i ) 
+{ return data_ [i ]; }
 ...
 private :
 	Type * data_ ;

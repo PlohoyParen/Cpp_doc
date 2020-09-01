@@ -62,9 +62,10 @@
 	- References
 		- Общее: как и зачем?
 		- Константные ссылки
-	- Dynamic memory allocation
+	- Dynamic memory allocation (оператор new)
 		- Статическое, автоматическое (стек) и динамическое выделение памяти (куча)
 		- Когда следует выделять память в куче (динамически)
+		- Placement new
 		- исключение bad_alloc
 		- Memory leak
 		

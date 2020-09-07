@@ -310,8 +310,7 @@ void foo(const Array<Array<T> >& array, std::ostream& out)
     {	//рекурсивно капаем вглубь вложенных Array
         foo(array, out);
     }
-}
-	
+}	
 ```
 
 ## Шаблоны классов

@@ -262,7 +262,7 @@ void foo(T a, V b) {
 	}
 // 3. Явная специализация шаблона
 template <>
-void foo <int , int >( int a , int b) {
+void foo<int , int >( int a , int b) {
 	cout << "both parameters are int" << endl;
 	}
 	

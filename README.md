@@ -319,6 +319,27 @@
 		- Интерфейсы
 		- Чистые виртуальные функции и виртуальная таблица
 	- Перегрузка потоков ввода и вывода
+	
+17. [**Chapter 17: Templates**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md)
+	- [Как это решалось в C (спойлер: макросы)](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D0%BA%D0%B0%D0%BA-%D1%8D%D1%82%D0%BE-%D1%80%D0%B5%D1%88%D0%B0%D0%BB%D0%BE%D1%81%D1%8C-%D0%B2-c-%D1%81%D0%BF%D0%BE%D0%B9%D0%BB%D0%B5%D1%80-%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D1%8B)
+	- [Шаблоны ф-ций](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D1%84-%D1%86%D0%B8%D0%B9)
+		- Как компилятор реализует шаблоны ф-ций
+		- Явная специализация шаблона ф-ции
+		- Вывод аргументов (deduce)
+		- Перегрузка щаблонов
+		- Явная специализация VS перегрузка шаблона
+		- Шаблоны методов (в основном для больщой 4ки)
+	- [Шаблоны классов](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2)
+		- Заголовочные файлы
+		- Явная специализация шаблона класса
+			- Полная специализация
+			- Частичная специализация 
+				- Использование родительского класса для частичной специализации метода класса
+		- none-type параметр
+			- Еще пример использования none-type параметра 
+	- [Несколько фич связанныз с классами](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D1%84%D0%B8%D1%87-%D1%81%D0%B2%D1%8F%D0%B7%D0%B0%D0%BD%D0%BD%D1%8B%D0%B7-%D1%81-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0%D0%BC%D0%B8)
+		- Использование зависимых имён
+		- Использование функций для вывода параметров
 		
 49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono

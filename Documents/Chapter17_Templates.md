@@ -664,19 +664,135 @@ assert( srcRect.left >= 0 );
 	{
 		for( int sx = srcRect.left; sx < srcRect.right; sx++ )
 		{	
-		/*** Все эти ф-ции отличаются только этой частью кода ***
+		/*** Все эти ф-ции отличаются только этой частью кода ***/
 			const Color srcPixel = s.GetPixel( sx,sy );
 			if( srcPixel != chroma )
 			{
 				PutPixel( x + sx - srcRect.left,y + sy - srcRect.top,srcPixel );
 			}
-		********************************************************/
+		/********************************************************/
 		}
 	}
 }
 ```
+В этом случаии идеальным решением будет создать по 1 функтору для каждой версии этой ф-ции:
+```cpp
+/*** В SpriteEffect.h ***/
+namespace SpriteEffect
+{
+	class Chroma
+	{
+	public:
+		Chroma( Color c )
+			:
+			chroma( c )
+		{}
+		void operator()( Color cSrc,int xDest,int yDest,Graphics& gfx ) const
+		{
+			if( cSrc != chroma )
+			{
+				gfx.PutPixel( xDest,yDest,cSrc );
+			}
+		}
+	private:
+		Color chroma;
+	};
+	class Substitution
+	{
+	public:
+		Substitution( Color c,Color s )
+			:
+			chroma( c ),
+			sub( s )
+		{}
+		void operator()( Color cSrc,int xDest,int yDest,Graphics& gfx ) const
+		{
+			if( cSrc != chroma )
+			{
+				gfx.PutPixel( xDest,yDest,sub );
+			}
+		}
+	private:
+		Color chroma = Colors::Magenta;
+		Color sub;
+	};
+	class Copy
+	{
+	public:
+		void operator()( Color cSrc,int xDest,int yDest,Graphics& gfx ) const
+		{
+			gfx.PutPixel( xDest,yDest,cSrc );
+		}
+	};
+	class Ghost
+	{
+	public:
+		Ghost( Color c )
+			:
+			chroma( c )
+		{}
+		void operator()( Color src,int xDest,int yDest,Graphics& gfx ) const
+		{
+			if( src != chroma )
+			{
+				const Color dest = gfx.GetPixel( xDest,yDest );
+				const Color blend = {
+					unsigned char( (src.GetR() + dest.GetR()) / 2 ),
+					unsigned char( (src.GetG() + dest.GetG()) / 2 ),
+					unsigned char( (src.GetB() + dest.GetB()) / 2 )
+				};
+				gfx.PutPixel( xDest,yDest,blend );
+			}
+		}
+	private:
+		Color chroma;
+	};
+}
+```
+А сама реализация ф-ции DrawSprite будет сделана через шаблоны:
+```cpp
+template<typename E>
+	void DrawSprite( int x,int y,RectI srcRect,const RectI& clip,const Surface& s,E effect )
+	{
+		assert( srcRect.left >= 0 );
+		assert( srcRect.right <= s.GetWidth() );
+		assert( srcRect.top >= 0 );
+		assert( srcRect.bottom <= s.GetHeight() );
+		if( x < clip.left )
+		{
+			srcRect.left += clip.left - x;
+			x = clip.left;
+		}
+		if( y < clip.top )
+		{
+			srcRect.top += clip.top - y;
+			y = clip.top;
+		}
+		if( x + srcRect.GetWidth() > clip.right )
+		{
+			srcRect.right -= x + srcRect.GetWidth() - clip.right;
+		}
+		if( y + srcRect.GetHeight() > clip.bottom )
+		{
+			srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+		}
+		for( int sy = srcRect.top; sy < srcRect.bottom; sy++ )
+		{
+			for( int sx = srcRect.left; sx < srcRect.right; sx++ )
+			{
+				effect(
+					s.GetPixel( sx,sy ),
+					x + sx - srcRect.left,
+					y + sy - srcRect.top,
+					*this
+				);
+			}
+		}
+	}
+```
+Таким образом, вместо параметра шаблона effect будет вызываться нужный функтор (например, `SpriteEffec::Chroma(Color chorma)` или `SpriteEffec::Substitution(Color chorma, Color subst)`).    
 
-В этом случаии важно соблюдать несколько условий:
+В этом случаии важно помнить:
 - Сигнатура функторов должна быть одинакова. Все различия скрыты внутри него. Таким образом, мы добиваемся единообразного вызова, чтобы создать на основе него шаблонный класс.
 
 ## Несколько фич связанныз с классами

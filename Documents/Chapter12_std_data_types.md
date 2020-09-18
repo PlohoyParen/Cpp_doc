@@ -158,7 +158,17 @@ std::cout << "length: " << array.size() << "  capacity: " << array.capacity() <<
 - `array.clear()` - очистить вектор
 - `vector.assign(n, val)` - assigns new contents to the vector, replacing its current contents (*val*), and modifying its size (*n*) accordingly
 - `vector.resize(n) /*or*/ vector.resize(n, val)` - Resizes the container so that it contains *n* elements. If *n* is smaller than the current container size, the content is reduced to its first *n* elements, removing those beyond (and destroying them). If *n* is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n (if *val* is specified, the new elements are initialized as copies of *val*, otherwise, they are value-initialized). If *n* is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
-	
+
+### Методы на основе итераторов
+- `v.erase(iter 1, iter 2)` - стирает элементы [iter 1, iter2), где iter - это итераторы, указывающие на элементы. Если итератор 1, то стирается только один элемент. Если их 2, то стираются все элементы между ними (не включая iter 2). При стирании, смещает последующие элементы на место только что стертых. Метод возвращает итератор, указывающий на певный из только что смещенных элементов.
+- `v1.emplace(iterV1 place, iterV2 begin, iterV2 end)` - Метод вставляющий срез одного вектора в другой в указанном итератором месте. При вставке, создается анонимный объект, который вставляется через конструктор копирования. Те действует аналоничено `push_back()`.
+	```cpp
+	std::vector<int> v1 = {0,1,2,3,4,5,6,7};
+	std::vector<int> v2 = {69,96};
+	v1.insert(v1.begin() + 3, v2.begin(), v2.end()); // теперь v1 = {1,2,3,69,96,45,6,7}
+	```
+- `v1.emplace(iterV1 place, iterV2 begin, iterV2 end)` - метод аналогичный методу insert, однако тут объекты конструируются in-place. Те действует аналоничено `emplace_back()`
+
 ### Методы делающие stack из std::vector
 Если использовать только эти три метода, то из вектора получится стэк (структура данных): 
 - `array.back()` - возвращает последний элемент вектора

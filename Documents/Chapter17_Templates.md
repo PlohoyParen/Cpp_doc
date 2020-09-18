@@ -622,6 +622,63 @@ int main()
 - `T (&arr)[size]` - передача по ссылке массива типа T и размера size. Если в ф-цию передать не статический массив, а что либо другое, то компилятор выдаст ошибку.
 - Тк тут используются статические массивы, то их размер известен at-compile time. Поэтому, none-type парамет подходит для этого. Нам не надо явно указывать поля для шаблона, компилятор сделает deduce из контекста. Тк компилятор знает размер массива, то и сам сделает deduce параметра size. 
 
+## template и функторы - союз созданный на небесах
+Если у нас есть куча различных перегрузок одной ф-ции, реализация которых отличается очень мало, то удобно создать 1 шаблонную ф-цию и несколько функторовы, которые будут в эту ф-цю передаваться. Например, в ChiliFramework у нас есть несколько версий ф-ций DrawSprite, которые ресуют на экране спрайт с небольшими различиями (рисуеи как есть, хромокей, смена цвета пикселя и эффект призрака(прозрачность)):
+```cpp
+/*** В Graphics.h ***/
+// this version of drawsprite draws all pixels as they are
+void DrawSpriteNonChroma( int x,int y,RectI srcRect,const RectI& clip,const Surface& s );
+// this version of drawsprite draws all pixels except chroma color
+void DrawSprite( int x,int y,RectI srcRect,const RectI& clip,const Surface& s,Color chroma = Colors::Magenta );
+// this version of drawsprite substitutes all drawn pixel colors with the supplied color
+void DrawSpriteSubstitute( int x,int y,Color substitute,RectI srcRect,const RectI& clip,const Surface& s,Color chroma = Colors::Magenta );
+// this version of drawsprite has 50% transparency
+void DrawSpriteGhost( int x,int y,RectI srcRect,const RectI& clip,const Surface& s,Color chroma = Colors::Magenta );
+```
+В то же время, их реализация одинакова везде, кроме вызова ф-ции PutPixel(), рисующей пиксель заданного цвета на экране:
+```cpp
+/*** В Graphics.cpp ***/
+assert( srcRect.left >= 0 );
+	assert( srcRect.right <= s.GetWidth() );
+	assert( srcRect.top >= 0 );
+	assert( srcRect.bottom <= s.GetHeight() );
+	if( x < clip.left )
+	{
+		srcRect.left += clip.left - x;
+		x = clip.left;
+	}
+	if( y < clip.top )
+	{
+		srcRect.top += clip.top - y;
+		y = clip.top;
+	}
+	if( x + srcRect.GetWidth() > clip.right )
+	{
+		srcRect.right -= x + srcRect.GetWidth() - clip.right;
+	}
+	if( y + srcRect.GetHeight() > clip.bottom )
+	{
+		srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+	}
+	for( int sy = srcRect.top; sy < srcRect.bottom; sy++ )
+	{
+		for( int sx = srcRect.left; sx < srcRect.right; sx++ )
+		{	
+		/*** Все эти ф-ции отличаются только этой частью кода ***
+			const Color srcPixel = s.GetPixel( sx,sy );
+			if( srcPixel != chroma )
+			{
+				PutPixel( x + sx - srcRect.left,y + sy - srcRect.top,srcPixel );
+			}
+		********************************************************/
+		}
+	}
+}
+```
+
+В этом случаии важно соблюдать несколько условий:
+- Сигнатура функторов должна быть одинакова. Все различия скрыты внутри него. Таким образом, мы добиваемся единообразного вызова, чтобы создать на основе него шаблонный класс.
+
 ## Несколько фич связанныз с классами
 ### Как узнать тип параметра через typedef (Использование зависимых имён)
 Может возникнуть ситуация, когда нам нужно внутри программы понять с каким типом данных был вызван данный шаблон, чтобы, например, корректно обработать его. Для этого можно использовать `typedef` следующим образом:

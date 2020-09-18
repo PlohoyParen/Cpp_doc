@@ -41,6 +41,7 @@
 		- library <iomanip>
 		- форматирование вывода
 		- распадение в указатель при выводе
+		- How std::cout evaluates arguments
 	- files
 		- Работа с файлами, как с потоком (Formatted input)
 		- Работа с файлом, как последовательностью символов char (Unformatted input)

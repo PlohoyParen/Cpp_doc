@@ -57,9 +57,9 @@ for (auto i = v.begin() + 1, e = v.end() - 2; i !=e; ++i)
 std::vector<int> v = {1,2,3,4,5};
 for (auto i = v.begin(), e = v.end(); i != e; ++i)
 {
-  if(*i % 2 == 0) 
+  if(*i % 2 == 0)     //удаляем четные элементы
   {
-    v.erase(i); //удаляем четные элементы
+    v.erase(i); 
   } 
 }
 ```
@@ -68,9 +68,9 @@ for (auto i = v.begin(), e = v.end(); i != e; ++i)
 std::vector<int> v = {1,2,3,4,5};
 for (auto i = v.begin(), e = v.end(); i != e;)
 {
-  if(*i % 2 == 0) 
+  if(*i % 2 == 0)     //удаляем четные элементы
   {
-    i = v.erase(i);   //удаляем четные элементы
+    i = v.erase(i);   //удаляем и возвращем итератор на первый из сдвинутых элементов
   }      
   else
   {

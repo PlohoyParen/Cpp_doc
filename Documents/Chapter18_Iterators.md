@@ -216,7 +216,7 @@ std::cout << *it;       // мы получим: 5
 ``` 
 
 ### Iterator adaptors
-#### std::back_insert_iterator and std::back_inserter
+#### std::back_insert_iterator и std::back_inserter
 - `std::back_insert_iterator ` - это специальный итератор-обертка, который опеспечивает добавление новых элементов в конец контейнера. Например:
   ```cpp
   std::vector<int> v;
@@ -248,7 +248,6 @@ std::cout << *it;       // мы получим: 5
       std::vector<float> v2 = { 7,6,5,4,3,2,1 };
       std::list<float> li1;                 // Внимание: 1. Подходит конейнер - любого типа. 2. Не надо самому выделять память
 
-      //sum(v1.begin(), v1.end(), v2.begin(), li1.begin());
       sum(v1.begin(), v1.end(), v2.begin(), std::back_inserter(li1));
       for (auto ch : li1)
       {
@@ -262,3 +261,30 @@ std::cout << *it;       // мы получим: 5
   2. Не надо самому заботиться о выделении памяти и величине контейнера ассоциированного с `std::back_insert_iterator()`.
 
 - Также есть `std::front_insert_iterator()` и `std::front_inserter()`, делающие то же самое, только добавляя новые элементы впереди, а не сзади.
+
+## Stream iterators 
+### std::istream_iterator и std::ostream_iterator
+Эти два итератора напрямую работают с потоками: `std::istream_iterator` - считывает с input; `std::ostream_iterator` - записывает в output потоки. Например, код выше можно переписать, неиспользуя 3й контейнер, а напрямую транслировать результат в output поток:
+ ```cpp
+  /* Ф-ция суммирующая содержимое 2х контейнеров и сохраняющая результат в 3й */
+  template<typename Iter1, typename Iter2, typename Iter3>
+  void sum(Iter1 beg1, Iter1 end1, Iter2 beg2, Iter3 beg3)
+  {
+      for (; beg1 != end1; ++beg1, ++beg2, ++beg3)
+      {
+          *beg3 = *beg1 + *beg2;
+      }
+  }
+
+  int main()
+  {
+      std::vector<int> v1 = { 1,2,3,4,5,6,7 };
+      std::vector<float> v2 = { 7,6,5,4,3,2,1 };
+
+      sum(v1.begin(), v1.end(), v2.begin(), std::ostream_iterator<float>(std::cout, " | "));  // выведет результат в терминал
+      return 0;
+  }
+  ```
+  `std::ostream_iterator<float>(std::cout, " | "))`        
+1. Это шаблон, и нужно указать вид параметра в <> . Этот параметр говорит компилятору в каком виде надо представить получиенные данные. Те в output потоке данные будут обработаны и представлены, как float. 
+2. Первый параметр это сам поток (в нашем случаии std::cout). Второй параметр (опционально) - это разделитель между элементами контейнера, ассоциированного std::ostream_iterator.

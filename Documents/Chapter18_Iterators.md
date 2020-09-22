@@ -214,3 +214,49 @@ std::cout << *it;       // мы получим: 1
 std::advance(it, 4);    // передвинули на 4 
 std::cout << *it;       // мы получим: 5  
 ``` 
+
+### Iterator adaptors
+#### std::back_insert_iterator and std::back_inserter
+- `std::back_insert_iterator ` - это специальный итератор-обертка, который опеспечивает добавление новых элементов в конец контейнера. Например:
+  ```cpp
+  std::vector<int> v;
+
+  std::back_insert_iterator<std::vector<int>>  it(v);
+
+  *it = 10;                     // it is equivalent to v.push_back(10);
+   it = 99;                     // it is ALSO equivalent to v.push_back(99);
+
+  for (auto const & i : v)
+      std::cout << i << " " ;   // выведет: 10 99
+  ```
+  Нужно обратить внимание, что изначально контейнер - пустой. Обертка берет на себя расширение контейнера и выделение ресурсов под него.    
+- `std::back_inserter()` - ф-ция упрощающая работу с std::back_insert_iterator. Она принимает контейнер, а возвращает  std::back_insert_iterator. Например:
+  ```cpp
+  /* Ф-ция суммирующая содержимое 2х контейнеров и сохраняющая результат в 3й */
+  template<typename Iter1, typename Iter2, typename Iter3>
+  void sum(Iter1 beg1, Iter1 end1, Iter2 beg2, Iter3 beg3)
+  {
+      for (; beg1 != end1; ++beg1, ++beg2, ++beg3)
+      {
+          *beg3 = *beg1 + *beg2;
+      }
+  }
+
+  int main()
+  {
+      std::vector<int> v1 = { 1,2,3,4,5,6,7 };
+      std::vector<float> v2 = { 7,6,5,4,3,2,1 };
+      std::list<float> li1;                 // Внимание: 1. Подходит конейнер - любого типа. 2. Не надо самому выделять память
+
+      //sum(v1.begin(), v1.end(), v2.begin(), li1.begin());
+      sum(v1.begin(), v1.end(), v2.begin(), std::back_inserter(li1));
+      for (auto ch : li1)
+      {
+          std::cout << ch << std::endl;
+      }
+      return 0;
+  }
+  ```
+  Внимание: 
+  1. Подходит конейнер - любого типа. Тут мы складываем содержимое std::vector и сохраняем в std::list. О синхронизации контейнеров заботится `std::back_insert_iterator`.
+  2. Не надо самому заботиться о выделении памяти и величине контейнера ассоциированного с `std::back_insert_iterator()`.

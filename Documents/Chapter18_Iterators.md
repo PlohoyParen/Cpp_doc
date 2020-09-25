@@ -349,3 +349,5 @@ public:
 		const Element* pElement = nullptr;
 	};
 ```
+
+- [Тут](https://gist.github.com/jeetsukumaran/307264) тут шаблон для универсального итератора, адаптированного к работе с библиотекой `<algorithm>`.

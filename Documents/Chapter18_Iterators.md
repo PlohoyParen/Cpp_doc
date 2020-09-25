@@ -288,3 +288,65 @@ std::cout << *it;       // мы получим: 5
   `std::ostream_iterator<float>(std::cout, " | "))`        
 1. Это шаблон, и нужно указать вид параметра в <> . Этот параметр говорит компилятору в каком виде надо представить получиенные данные. Те в output потоке данные будут обработаны и представлены, как float. 
 2. Первый параметр это сам поток (в нашем случаии std::cout). Второй параметр (опционально) - это разделитель между элементами контейнера, ассоциированного std::ostream_iterator.
+
+## Базовый итератор для кастомного класса
+Чтобы класс мог использовать range-based for нужно прописать базовый итератор. У него должны быть следующие методы:
+1. `begin()` и `end()` - возвращающие что-то итерируемое (желательно итератор, но если элементы заполнены непрерывно в памяти, то сойдет и указатель). Плюс к этому надо прописать их константные версии `cbegin()` и `cend()`.
+2. Оператор инкремента `++` для данного итератора.
+3. Оператор `!=` для данного итератора.
+4. Оператор раименования `*` для данного итератора.     
+
+Ниже пример простого итератора для корректной работы range-base for для струкрутры LinkedListStack (из туториала Chili):
+```cpp
+/* Определение класса Итератора находится внутри класса LinkedListStack */
+public:
+  class Iterator
+	{
+	public:
+		Iterator() = default;
+		Iterator( Element* pElement )
+			:
+			pElement( pElement )
+		{}
+		Iterator& operator++()
+		{
+			pElement = pElement->pNext;
+			return *this;
+		}
+		int& operator*() const  // Обратите внимание: раименование возращает не сам элемент,
+		{                       // при этом (обнажая доступ к указателю на следующий элемент), 
+			return pElement->val; // а на поле данных. Указатель на следующий элемент остается скрыт
+		}
+		bool operator!=( Iterator rhs ) const
+		{
+			return pElement != rhs.pElement;
+		}
+	private:
+		Element* pElement = nullptr;
+	};
+	class ConstIterator           // Нужно всегда создавать 2 типа Итератора: обычный и const
+	{
+	public:
+		ConstIterator() = default;
+		ConstIterator( const Element* pElement )
+			:
+			pElement( pElement )
+		{}
+		ConstIterator& operator++()
+		{
+			pElement = pElement->pNext;
+			return *this;
+		}
+		const int& operator*() const  // Отличие обычного и const итераторов тут:
+		{                             // там возвращалась обычная ссылка, а тут const.
+			return pElement->val;       // Таким образом мы запрещаем изменение этого поля
+		}
+		bool operator!=( ConstIterator rhs ) const
+		{
+			return pElement != rhs.pElement;
+		}
+	private:
+		const Element* pElement = nullptr;
+	};
+```
+2. 

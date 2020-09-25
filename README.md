@@ -343,7 +343,24 @@
 	- [Несколько фич связанныз с классами](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D1%84%D0%B8%D1%87-%D1%81%D0%B2%D1%8F%D0%B7%D0%B0%D0%BD%D0%BD%D1%8B%D0%B7-%D1%81-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0%D0%BC%D0%B8)
 		- Использование зависимых имён
 		- Использование функций для вывода параметров
-		
+
+18. [**Chapter 18: Iterators**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md)
+	- [Основы синтаксиса](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%81%D0%B8%D0%BD%D1%82%D0%B0%D0%BA%D1%81%D0%B8%D1%81%D0%B0)
+		- Iterator invalidation
+	- [Инкриментирование в итераторах](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B8%D0%BD%D0%BA%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85)
+	- [Итераторы бывают разные](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-%D0%B1%D1%8B%D0%B2%D0%B0%D1%8E%D1%82-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%B5)
+	- [Почему вся STL построена на итераторах?](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%B2%D1%81%D1%8F-stl-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BD%D0%B0-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85)
+	- [Const iterator](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#const-iterator)
+	- [Reverse interator](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#reverse-interator)
+	- [Библиотека <iterator>](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B0-iterator)
+		- std::begin() и std::end()
+		- std::advace()
+		- Iterator adaptors
+			- std::back_insert_iterator и std::back_inserter
+		- Stream iterators
+			- std::istream_iterator и std::ostream_iterator
+	- [Базовый итератор для кастомного класса](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0)
+	
 49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono
 	- random (и cstdlib)

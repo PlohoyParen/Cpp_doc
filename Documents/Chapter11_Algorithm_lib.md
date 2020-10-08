@@ -4,16 +4,49 @@
 `bidirectional_iterator` - Bidirectional iterators are iterators that can be used to access the sequence of elements in a range in both directions (towards the end and towards the beginning). `RamdomAccessIterator > bidirectional_iterator`.    
 `forward_iterator` - Forward iterators are iterators that can be used to access the sequence of elements in a range in the direction that goes from its beginning towards its end. `RamdomAccessIterator > bidirectional_iterator > forward_iterator`.    
 
+## functional lib
+Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>`.    
+### Comparasing functors
+Это templates для операций сравнения:
+- `equal_to` и `not_equal_to`
+- `greater` и `less` 
+- `greate_equal` и `less_equal` 
+Пример:
+```cpp
+...
+#include<functional>
+std::vector<int> vec = { 25,6,7,9,32,6,3,2,6,72,0 };
+std::sort(vec.begin(), vec.end(), std::greater<int>{});
+```
 
 ## Ф-ции
-### std::sort 
-[Reference](https://en.cppreference.com/w/cpp/algorithm/sort)                 
-`sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).
+### std::sort              
+1. `sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).          
     ```cpp
     #include <algorithm>
     sort(begin(nums), end(nums)) //принимет итератор на начало и на конец
     ```
-    Требоания к контейнеру:
+
+2. Операция сравенения задается функтором. По дефолту это `less`. Можно явно задать нужный функтор сравнения:
+    ```cpp
+    std::vector<int> vec = { 25,6,7,9,32,6,3,2,6,72,0 };
+    std::sort(vec.begin(), vec.end(), std::greater<int>{});
+    ```
+    Для собственных типов нужно определить оператор сравнения, и тогда алгоритм сможет отсортировать контейнер содержащий объектры класса:
+    ```cpp
+    class Triplets
+    {
+        //some methods, constructors etc
+        bool operator<(const Triplet& rhs) const
+        { //some code here  }
+    };
+    
+    std::vector<Triplets> vec = { {25,6,7},{9,32,6},{3,2,6}};
+    std::sort(vec.begin(), vec.end());  //needs operator <
+    //std::sort(vec.begin(), vec.end(), std::greater<Triplets>{}); // would need operator >
+    ```
+    
+3. Требоания к контейнеру:
     - RandomIt must meet the requirements of `ValueSwappable` and `LegacyRandomAccessIterator`.
     - The type of dereferenced RandomIt must meet the requirements of `MoveAssignable` and `MoveConstructible`.
     - Compare must meet the requirements of `Compare`.

@@ -1,12 +1,13 @@
 # Chapter 11 Algorithm lib
-## A few terms
+## A few things algorithm relies on 
 `RamdomAccessIterator` - итератор, который может обращаться напрямую у любому элементу контейнера. Таким итератором обладают контейнеры, которые лежать в памяти последовательно, те нам не надо знать где лежит предудщий элемент, чтобы узнать последующий.     
 `bidirectional_iterator` - Bidirectional iterators are iterators that can be used to access the sequence of elements in a range in both directions (towards the end and towards the beginning). `RamdomAccessIterator > bidirectional_iterator`.    
 `forward_iterator` - Forward iterators are iterators that can be used to access the sequence of elements in a range in the direction that goes from its beginning towards its end. `RamdomAccessIterator > bidirectional_iterator > forward_iterator`.    
 
-## functional lib
-Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>`.    
 ### Comparasing functors
+Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>` и написать свои.   
+#### functional lib
+Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>`.    
 Это templates для операций сравнения:
 - `equal_to` и `not_equal_to`
 - `greater` и `less` 
@@ -17,6 +18,28 @@
 #include<functional>
 std::vector<int> vec = { 25,6,7,9,32,6,3,2,6,72,0 };
 std::sort(vec.begin(), vec.end(), std::greater<int>{});
+```
+
+#### Свой функтор сравнения 
+Иногда полезно создать свой функтор, наприрмер, если сранение объектов класса может поросходить по нескольким принципам. Тогда наиболее очевыдный (например, id объекта) будет использовать операторы сравнения, а альтенативные способы будут реализованы через функторы:
+```cpp
+class Dude
+{
+private:
+    int id; 
+    int a;
+    int b;
+public:
+    Dude(int id, int a, int b) : id(id), a(a), b(b) {}
+    bool operator<(const Dude& rhs) const   
+    {   return id <rhs.id;  }               //основной метод сравнения, будет полагаться на функторы из <funcltional>
+    
+    class ALess
+    {
+        bool operator()(const Dude& lhs, const Dude& rhs)   
+        {   return lhs.a < rhs.b;   }       //альтернативный метод сравнения, будет вызываться для сравнения через a
+    }
+};
 ```
 
 ## Ф-ции
@@ -36,16 +59,28 @@ std::sort(vec.begin(), vec.end(), std::greater<int>{});
     ```
     Для собственных типов нужно определить оператор сравнения, и тогда алгоритм сможет отсортировать контейнер содержащий объектры класса:
     ```cpp
-    class Triplets
+    class Dude
     {
-        //some methods, constructors etc
-        bool operator<(const Triplet& rhs) const
-        { //some code here  }
+    private:
+        int id; 
+        int a;
+        int b;
+    public:
+        Dude(int id, int a, int b) : id(id), a(a), b(b) {}
+        bool operator<(const Dude& rhs) const   
+        {   return id <rhs.id;  }               //основной метод сравнения, будет полагаться на функторы из <funcltional>
+
+        class ALess
+        {
+            bool operator()(const Dude& lhs, const Dude& rhs)   
+            {   return lhs.a < rhs.b;   }       //альтернативный метод сравнения, будет вызываться для сравнения через a
+        }
     };
-    
-    std::vector<Triplets> vec = { {25,6,7},{9,32,6},{3,2,6}};
+
+    std::vector<Dude> vec = { {25,6,7},{9,32,6},{3,2,6}};
     std::sort(vec.begin(), vec.end());  //needs operator <
-    //std::sort(vec.begin(), vec.end(), std::greater<Triplets>{}); // would need operator >
+    //std::sort(vec.begin(), vec.end(), std::greater<Dude>{}); // would need operator >
+    std::sort(vec.begin(), vec.end(), Dude::Aless{});          //Создаем экземпляр функтора
     ```
     
 3. Требоания к контейнеру:

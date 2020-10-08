@@ -7,7 +7,7 @@
 
 ## Ф-ции
 ### std::sort 
-(Reference)[https://en.cppreference.com/w/cpp/algorithm/sort]                 
+[Reference](https://en.cppreference.com/w/cpp/algorithm/sort)                 
 `sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).
     ```cpp
     #include <algorithm>

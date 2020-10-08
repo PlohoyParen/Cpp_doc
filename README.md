@@ -213,7 +213,7 @@
 		- Глобальное пространство имен 
 		- :: и using
 		- Псевдонимы (вложение)
-11. [**Chapter 11: Algorithms lib**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter11_Algorithm_lib.md)
+11. [**Chapter 11: Algorithm lib**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter11_Algorithm_lib.md)
 	- count(begin, end, what) 
 	- sort(begin, end) 
 	- swap(a, b)

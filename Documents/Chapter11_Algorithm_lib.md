@@ -29,6 +29,8 @@ std::sort(vec.begin(), vec.end(), std::greater<int>{});
 
 2. Операция сравенения задается функтором. По дефолту это `less`. Можно явно задать нужный функтор сравнения:
     ```cpp
+    ...
+    #include <functional>
     std::vector<int> vec = { 25,6,7,9,32,6,3,2,6,72,0 };
     std::sort(vec.begin(), vec.end(), std::greater<int>{});
     ```

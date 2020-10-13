@@ -5,7 +5,7 @@
 `forward_iterator` - Forward iterators are iterators that can be used to access the sequence of elements in a range in the direction that goes from its beginning towards its end. `RamdomAccessIterator > bidirectional_iterator > forward_iterator`.    
 
 ### Comparasing functors
-Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>` и написать свои.   
+Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>` или написать свои.   
 #### functional lib
 Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>`.    
 Это templates для операций сравнения:
@@ -41,6 +41,9 @@ public:
     }
 };
 ```
+
+### Predicates
+**Predicate** 
 
 ## <Algorithm>
 ### std::sort              

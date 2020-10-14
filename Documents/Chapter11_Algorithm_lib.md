@@ -36,10 +36,19 @@ public:
     
     class ALess
     {
+    public:                                 // функтор должен быть public
         bool operator()(const Dude& lhs, const Dude& rhs)   
-        {   return lhs.a < rhs.b;   }       //альтернативный метод сравнения, будет вызываться для сравнения через a
-    }
+        {   return lhs.a < rhs.a;   }       //альтернативный метод сравнения, будет вызываться для сравнения через a
+    };
+    int GetA() const { return a; }
 };
+
+int main()
+{
+    std::vector<Dude> v = {{1,2,4}, {2,5,4},{3,1,4}};
+    std::sort(v.begin(), v.end(), Dude::ALess());
+    return 0;
+}
 ```
 
 ### Predicates
@@ -47,9 +56,31 @@ public:
 
 If an algorithm takes a Predicate `pred` and an iterator `first`, it should be able to test the object of the type pointed to by the iterator first using the given predicate via a construct like `if(pred(*first)) {...}`. However, usualy an algorith will take `begining` and `end` Iterators, and Predicate `pred`, that will be sequentially called on the objects. For example:
 ```cpp
+bool isEven(int num)    //простой Predicate - функция 
+{
+    return !(num%2);
+}
 
+class isOdd            ////простой Predicate - функтор
+{
+public:
+    bool operator()(int num)
+    {
+        return num%2;
+    }
+};
+
+int main()
+{
+    std::vector<int> v= {1,2,3,4,5,6,7,8,9};
+    int evens = std::count_if(v.begin(), v.end(), isEven);
+    int odds = std::count_if(v.begin(), v.end(), isOdd{}); 
+    std::cout << "Odds" << odds << "| Evens: " << evens;
+    return 0;
+}
 ```
-
+Вызов Predicate-функции: просто передается адрес функции (те ее название), те `std::count_if(v.begin(), v.end(), isEven);`;
+Вызов Predicate-функтора: создается анонимный объект-функтор, а внутри алгоритма он уже вызыватеся аналогичным для ф-ции синтаксисом. Uniform инициализация:  `std::count_if(v.begin(), v.end(), isOdd{});`; Обычная инициализация: `std::count_if(v.begin(), v.end(), isOdd());`
 
 ## <Algorithm>
 ### std::sort              

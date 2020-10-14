@@ -4,7 +4,7 @@
 `bidirectional_iterator` - Bidirectional iterators are iterators that can be used to access the sequence of elements in a range in both directions (towards the end and towards the beginning). `RamdomAccessIterator > bidirectional_iterator`.    
 `forward_iterator` - Forward iterators are iterators that can be used to access the sequence of elements in a range in the direction that goes from its beginning towards its end. `RamdomAccessIterator > bidirectional_iterator > forward_iterator`.    
 
-### Comparasing functors
+### 1. Comparasing functors
 Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>` или написать свои.   
 #### functional lib
 Для некоторых алгоритмов используются функторы, найти которые можно в `<functional>`.    
@@ -51,8 +51,8 @@ int main()
 }
 ```
 
-### Predicates
-**Predicate** is a function returning a `bool` or an object having a `bool operator()` member (те functor). A unary predicate takes one argument, a binary takes two, and so on. Predicate is typically used with algorithms that take input data (individual objects/containers) and a predicate, which is then called on input data to decide on further course of action. Almost all STL algorithms have an overloaded version that takes a predicate as last argument.    
+### 2. Predicates
+**Predicate** is a *function* returning a `bool` or an object having a `bool operator()` member (те *functor*). A unary predicate takes one argument, a binary takes two, and so on. Predicate is typically used with algorithms that take input data (individual objects/containers) and a predicate, which is then called on input data to decide on further course of action. Almost all STL algorithms have an overloaded version that takes a predicate as last argument.    
 
 If an algorithm takes a Predicate `pred` and an iterator `first`, it should be able to test the object of the type pointed to by the iterator first using the given predicate via a construct like `if(pred(*first)) {...}`. However, usualy an algorith will take `begining` and `end` Iterators, and Predicate `pred`, that will be sequentially called on the objects. For example:
 ```cpp

@@ -43,7 +43,13 @@ public:
 ```
 
 ### Predicates
-**Predicate** 
+**Predicate** is a function returning a `bool` or an object having a `bool operator()` member (те functor). A unary predicate takes one argument, a binary takes two, and so on. Predicate is typically used with algorithms that take input data (individual objects/containers) and a predicate, which is then called on input data to decide on further course of action. Almost all STL algorithms have an overloaded version that takes a predicate as last argument.    
+
+If an algorithm takes a Predicate `pred` and an iterator `first`, it should be able to test the object of the type pointed to by the iterator first using the given predicate via a construct like `if(pred(*first)) {...}`. However, usualy an algorith will take `begining` and `end` Iterators, and Predicate `pred`, that will be sequentially called on the objects. For example:
+```cpp
+
+```
+
 
 ## <Algorithm>
 ### std::sort              

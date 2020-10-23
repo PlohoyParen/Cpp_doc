@@ -82,6 +82,9 @@ int main()
 - Вызов **Predicate-функции**: просто передается адрес функции (те ее название), те `std::count_if(v.begin(), v.end(), isEven);`;
 - Вызов **Predicate-функтора**: создается анонимный объект-функтор, а внутри алгоритма он уже вызыватеся аналогичным для ф-ции синтаксисом. Uniform инициализация:  `std::count_if(v.begin(), v.end(), isOdd{});`; Обычная инициализация: `std::count_if(v.begin(), v.end(), isOdd());`
 
+### 3. lambda functions
+
+
 ## <Algorithm>
 ### std::sort              
 1. `sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).          
@@ -136,6 +139,14 @@ int main()
     int quantity = count(begin(nums), end(nums), 5);
     cout << qunantity;         //will return 2
     ```
+### std::for_each
+`std::for_each(begin_iter, end_iter, funct);` - применяет ф-цию funct ко всем объектам, указаным с помощью итераторов begin_iter и end_iter.
+```cpp
+void func3(std::vector<int>& v) 
+{
+  std::for_each(v.begin(), v.end(), [](int) { /* do something here*/ });    //вызов с lambda ф-цией
+}
+```
 
 3. `swap(a, b)` - меняем местами значения переменных a и b (напр., a=1, b=2 -> a=2, b=1)
 

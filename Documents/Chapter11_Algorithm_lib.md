@@ -83,7 +83,88 @@ int main()
 - Вызов **Predicate-функтора**: создается анонимный объект-функтор, а внутри алгоритма он уже вызыватеся аналогичным для ф-ции синтаксисом. Uniform инициализация:  `std::count_if(v.begin(), v.end(), isOdd{});`; Обычная инициализация: `std::count_if(v.begin(), v.end(), isOdd());`
 
 ### 3. lambda functions
+C++11 introduces lambdas allow you to write an inline, anonymous functors. **Lambda functions are just syntactic sugar for anonymous functors.** For small simple examples this can be cleaner to read (it keeps everything in one place) and potentially simpler to maintain, for example: 
+```cpp
+void func3(std::vector<int>& v)
+{
+  std::for_each(v.begin(), v.end(), [](int) { /* do something here*/ });
+}
+```
 
+#### Return types
+In simple cases the return type of the lambda is deduced for you, e.g.:
+```cpp
+void func4(std::vector<double>& v) 
+{
+  std::transform(v.begin(), v.end(), v.begin(),
+                 [](double d) { return d < 0.00001 ? 0 : d; }
+                 );
+}
+```
+
+However when you start to write more complex lambdas you will quickly encounter cases where the return type cannot be deduced by the compiler, e.g.:
+```cpp
+void func4(std::vector<double>& v) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [](double d) {
+            if (d < 0.0001) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+}
+```
+
+To resolve this you are allowed to explicitly specify a return type for a lambda function, using `-> T`:
+```cpp
+void func4(std::vector<double>& v) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [](double d) -> double {                    //here we specify
+            if (d < 0.0001) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+}
+```
+
+#### "Capturing" variables
+So far we've not used anything other than what was passed to the lambda within it, but we can also use other variables, within the lambda. **So, capturing is required if we want to used and object that was created outside lambda.** If you want to access other variables you can use the capture clause (the `[]` of the expression), which has so far been unused in these examples, e.g.:
+```cpp
+void func5(std::vector<double>& v, const double& epsilon) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [epsilon](double d) -> double {
+            if (d < epsilon) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+}
+```
+You can capture by both reference and value, which you can specify using `&` and `=` respectively:
+- `[&epsilon]` capture by reference
+- `[&]` captures all variables used in the lambda by reference
+- `[=]` captures all variables used in the lambda by value
+- `[&, epsilon]` captures all the variables with `[&]`, but epsilon by value
+- `[=, &epsilon]` captures all the variables with `[=]`, but epsilon by reference
+
+#### lambda is const by default
+Actually, the generated `operator()` is `const` by default, so all the captured objects are also caputed as `const` by default. This has the effect that each call with the same input would produce the same result.    
+
+To change it indicate `mutable`:
+```cpp
+int x = 0;
+auto foo = [x] () mutable { // можно передать адрес на lambda указателю
+ x++;                       // "x" cannot be modified without keyword mutable. 
+ return x;
+};
+```
+
+#### Source
+(Source)[https://stackoverflow.com/questions/7627098/what-is-a-lambda-expression-in-c11]
 
 ## <Algorithm>
 ### std::sort              
@@ -142,7 +223,7 @@ int main()
 ### std::for_each
 `std::for_each(begin_iter, end_iter, funct);` - применяет ф-цию funct ко всем объектам, указаным с помощью итераторов begin_iter и end_iter.
 ```cpp
-void func3(std::vector<int>& v) 
+void funct(std::vector<int>& v) 
 {
   std::for_each(v.begin(), v.end(), [](int) { /* do something here*/ });    //вызов с lambda ф-цией
 }

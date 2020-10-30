@@ -29,4 +29,6 @@ There are two types of errors:
         	std::cout << "Letter #" << nIndex << " is " << strHello[nIndex] << std::endl;
         ```
 
-**Defensive programming** - programmer predicts where error could appear and add *error handling* mechanism.
+**Defensive programming** - programmer predicts where error could appear. You can:
+1. *Terminate a programm* due to the error
+2. *Handle the error*

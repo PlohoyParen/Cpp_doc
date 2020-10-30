@@ -2,7 +2,7 @@
 ## Motivation
 
 There are two types of errors:
-1. **Syntax errors** - wrong C++ syntax. Compiler will find it.
+1. **Syntax errors** - wrong C++ syntax. Compiler will find it.      
     Например:
     ```
     f 5 > 6 then write "not equal";

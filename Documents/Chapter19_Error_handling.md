@@ -30,5 +30,5 @@ There are two types of errors:
         ```
 
 **Defensive programming** - programmer predicts where error could appear. You can:
-1. *Terminate a programm* due to the error
-2. *Handle the error*
+1. Terminate a programm due to the error
+2. Handle the error 

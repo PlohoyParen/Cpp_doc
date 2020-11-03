@@ -169,7 +169,7 @@ auto foo = [x] () mutable { // можно передать адрес на lambd
 
 # <Algorithm>
 
-## Sequence operators 
+## 1. Sequence operators 
 	
 ### sort и stable_sort             
 1. `sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).          
@@ -320,7 +320,7 @@ std::set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(),
                     std::inserter(result, result.end()));
 ```
 
-## Mathematics
+## 2. Mathematics
 
 ### count 
 `count(begin, end, what)` - считает *what* в любом контейнере (включая list, forward_list etc):

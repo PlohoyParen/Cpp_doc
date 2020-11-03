@@ -168,7 +168,7 @@ auto foo = [x] () mutable { // можно передать адрес на lambd
 
 ## <Algorithm>
     
-### sort              
+### sort и stable_sort             
 1. `sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).          
     ```cpp
     #include <algorithm>
@@ -212,6 +212,28 @@ auto foo = [x] () mutable { // можно передать адрес на lambd
     - RandomIt must meet the requirements of `ValueSwappable` and `LegacyRandomAccessIterator`.
     - The type of dereferenced RandomIt must meet the requirements of `MoveAssignable` and `MoveConstructible`.
     - Compare must meet the requirements of `Compare`.
+    
+4. **stable_sort**. Если контейнер уже отсортирован по некоторому признаку и мы хотим отсортировать его по другому признаку, однако в случаи совпадения оставить изначальный порядок то нам надо использовать `stable_sort`. Происходит это потому, что `sort` не обещает сохранение порядка, в слачии совпадения по признаку. Тк `sort` автоматически выбирает оптимальный алгорим сортировки, то он может прибегнуть к quick_sort, а он мешает все подрад лишь бы главный признак был в порядке. Например, пусть мы хотим, чтобы гланый признак сортировки был `num`, а вторичный `str`
+```cpp
+struct Dude
+{
+	int num;
+	std::string str;
+	bool operator<(const Dude& rhs) const
+	{
+		return num < rhs.num;
+	}
+};
+std::vector<Dude> numbers = {{ 0,"zero" }, { 9,"nine" },
+                             { 7,"seven" }, { 2,"two" },
+                             { 8,"eight" }, { 3,"three" }}
+//сначала надо отсортировать по вторичному признаку (str):
+std::sort(numbers.begin(), numbers.end(), [](const Dude& lhs, const Dude& rhs)
+                                            { return lhs.str < rhs.str; }); //по убыванию
+//теперь сортировка по главному признаку, но чтобы все не перемешалось по вторичному, будем использовать stabel_sort:
+std::stabel_sort(numbers.begin(), numbers.end(), [](const Dude& lhs, const Dude& rhs)
+                                            { return lhs.num > rhs.num; }); //по возрастанию
+```
 
 ### remove and remove_if
 **remove**    

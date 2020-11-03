@@ -167,7 +167,8 @@ auto foo = [x] () mutable { // можно передать адрес на lambd
 (Source)[https://stackoverflow.com/questions/7627098/what-is-a-lambda-expression-in-c11]
 
 ## <Algorithm>
-### std::sort              
+    
+### sort              
 1. `sort(begin, end)` - сортировка контейнера c `RamdomAccessIterator`(string, array etc; у контейнеров с bidirectional/forward iterator обычно есть собственные методы для сортировки). The algorithm used by sort() is *IntroSort*. Introsort being a hybrid sorting algorithm uses three sorting algorithm to minimise the running time, *Quicksort*, *Heapsort* and *Insertion Sort*, taking the fastest fot the case. Comlexity: O(N*log(N)).          
     ```cpp
     #include <algorithm>
@@ -211,8 +212,65 @@ auto foo = [x] () mutable { // можно передать адрес на lambd
     - RandomIt must meet the requirements of `ValueSwappable` and `LegacyRandomAccessIterator`.
     - The type of dereferenced RandomIt must meet the requirements of `MoveAssignable` and `MoveConstructible`.
     - Compare must meet the requirements of `Compare`.
- 
-### std::count 
+
+### remove and remove_if
+**remove**    
+```cpp
+auto new_end = std::remove(v.begin(), v.end(), a)
+v.erase(new_end, v.end());  //чистим мустор
+```
+`remove()` - удалит элементы равные `a`, и сметит далее стоящие элементы внутри контейнера `v` на место удаленных. Однако, remove не сделает resize/erase контейнера. Он отанется того же размера, а последние n элементов (где n - кол-во удаленных элементов) будут заполнены мусором. Поэтому, нужно вручную сделать `erase` мусорную часть этого контейнра после удаления. Ф-ция remove возвращает указатель на последний не удаленный (не мусторный) элемент.       
+
+Общий вид remove таков:    
+```cpp
+template< class ForwardIt, class T >
+constexpr ForwardIt remove( ForwardIt first, ForwardIt last, const T& value );
+```
+
+**remove_if**     
+Налогично действиям других ф-ций с `_if`, требует UnaryPredicate, на основе которого идет отбор удаляемых элементов. Если Predicate возвращает True, то элемент удаляется. Например:
+```cpp
+auto new_end = std::remove_if(v.begin(), v.end(), [](const Pube& pube) {return pube.num < 3; });    // тут Predicate - это lambda ф-ция
+```
+Общий вид remove таков:   
+```cpp
+template< class ForwardIt, class UnaryPredicate >
+constexpr ForwardIt remove_if( ForwardIt first, ForwardIt last, UnaryPredicate p );
+```
+
+### copy and copy_if
+**copy**
+```cpp
+template< class InputIt, class OutputIt >
+constexpr OutputIt copy( InputIt first, InputIt last, OutputIt d_first );
+```
+**copy_if**
+```cpp
+template< class InputIt, class OutputIt, class UnaryPredicate >
+constexpr OutputIt copy_if( InputIt first, InputIt last, OutputIt d_first, UnaryPredicate pred );
+```
+`first`, `last` - the range of elements to copy; `d_first` - the beginning of the destination range; `pred`	-	unary predicate which returns `True` for the required elements.
+
+
+Пример 1:
+```cpp
+std::vector<Dude> my_dudes;
+auto end = std::copy(your_dudes.begin(), your_dudes.end(), std::back_inserter(my_dudes));
+```
+Тк `my_dudes` изначально пуст, то надо использовать `back_inserter`, чтобы элементы корректно копировались в конец my_dudes.     
+
+Пример 2:
+```cpp
+friend std::ostream& operator<<(std::ostream& out,  const Dude& dude)   //need that for output stream
+{
+    return out << dude.name << " " << dude.kek;
+}
+std::copy(your_dudes.begin(), your_dudes.end(), std::ostream_iterator<Dude>(std::cout, "\n"));  //need to provide operator<< overload
+```
+Тут мы копируем контейнер в output stream. Таким образом мы можем вывести в терминал весь контейнер целиком не используя циклы.
+
+
+### count 
 `count(begin, end, what)` - считает *what* в любом контейнере (включая list, forward_list etc):
     ```cpp
     #include <algorithm>
@@ -220,7 +278,7 @@ auto foo = [x] () mutable { // можно передать адрес на lambd
     int quantity = count(begin(nums), end(nums), 5);
     cout << qunantity;         //will return 2
     ```
-### std::for_each
+### for_each
 `std::for_each(begin_iter, end_iter, funct);` - применяет ф-цию funct ко всем объектам, указаным с помощью итераторов begin_iter и end_iter.
 ```cpp
 void funct(std::vector<int>& v) 
@@ -229,9 +287,11 @@ void funct(std::vector<int>& v)
 }
 ```
 
-3. `swap(a, b)` - меняем местами значения переменных a и b (напр., a=1, b=2 -> a=2, b=1)
+### swap
+`swap(a, b)` - меняем местами значения переменных a и b (напр., a=1, b=2 -> a=2, b=1)
 
-4. `std::set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), result_inserter)`- принимает два контейнера (не обязвательно set) в форме: begin(), end() и возвращает интератор с их разницей. Контейнеры должны быть **отсортированы** (set уже отсортирован, а наример vector надо сортировать).    
+### set_difference
+`std::set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), result_inserter)`- принимает два контейнера (не обязвательно set) в форме: begin(), end() и возвращает интератор с их разницей. Контейнеры должны быть **отсортированы** (set уже отсортирован, а, наример, vector надо отсортировать).    
 ```cpp
 #include <algorithm>
 #include <set>
@@ -241,4 +301,5 @@ std::set<int> s1, s2;
 // Fill in s1 and s2 with values
 std::set<int> result;
 std::set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(),
-    std::inserter(result, result.end()));
+                    std::inserter(result, result.end()));
+```

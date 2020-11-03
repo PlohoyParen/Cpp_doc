@@ -214,10 +214,22 @@
 		- :: и using
 		- Псевдонимы (вложение)
 11. [**Chapter 11: Algorithm lib**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter11_Algorithm_lib.md)
-	- count(begin, end, what) 
-	- sort(begin, end) 
-	- swap(a, b)
-	- set_difference(set1, set2, result)
+	- [A few things algorithm relies on](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter11_Algorithm_lib.md#a-few-things-algorithm-relies-on)
+		- 1. Comparasing functors
+			- functional lib
+			- Свой функтор сравнения
+		- 2. Predicates
+		- 3. lambda functions
+	- [1. Sequence operators](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter11_Algorithm_lib.md#1-sequence-operators)
+		- sort и stable_sort
+		- remove and remove_if
+		- copy and copy_if
+		- for_each
+		- swap
+		- set_difference
+	- [2. Mathematics](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter11_Algorithm_lib.md#2-mathematics)
+		- count
+		- accoumulate
 
 12. [**Chapter 12: std data types**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter12_std_data_types.md)
 	- strings

@@ -291,15 +291,6 @@ std::copy(your_dudes.begin(), your_dudes.end(), std::ostream_iterator<Dude>(std:
 ```
 Тут мы копируем контейнер в output stream. Таким образом мы можем вывести в терминал весь контейнер целиком не используя циклы.
 
-
-### count 
-`count(begin, end, what)` - считает *what* в любом контейнере (включая list, forward_list etc):
-    ```cpp
-    #include <algorithm>
-    vector<int> nums= {1,2,3, 5, 6,43, 5};
-    int quantity = count(begin(nums), end(nums), 5);
-    cout << qunantity;         //will return 2
-    ```
 ### for_each
 `std::for_each(begin_iter, end_iter, funct);` - применяет ф-цию funct ко всем объектам, указаным с помощью итераторов begin_iter и end_iter.
 ```cpp
@@ -324,4 +315,35 @@ std::set<int> s1, s2;
 std::set<int> result;
 std::set_difference(s1.begin(), s1.end(), s2.begin(), s2.end(),
                     std::inserter(result, result.end()));
+```
+
+### count 
+`count(begin, end, what)` - считает *what* в любом контейнере (включая list, forward_list etc):
+    ```cpp
+    #include <algorithm>
+    vector<int> nums= {1,2,3, 5, 6,43, 5};
+    int quantity = count(begin(nums), end(nums), 5);
+    cout << qunantity;         //will return 2
+    ```
+ 
+ ### accoumulate
+ Ф-ция которая суммирует(или делает другую бинарную операцию) все числа контейнера
+```cpp
+//версия для суммы 
+template< class InputIt, class T >
+constexpr T accumulate( InputIt first, InputIt last, T init );
+```
+ Или
+```cpp
+//версия для любой бинарной операции
+template< class InputIt, class T, class BinaryOperation >
+constexpr T accumulate( InputIt first, InputIt last, T init, BinaryOperation op );
+ ```
+`first`, `last`	- the range of elements to sum;`init` -	initial value of the sum;  
+`op`-	binary operation function object that will be applied. The binary operator takes the current accumulation value a (initialized to init) and the value of the current element b. The signature of the function should be equivalent to the following: `T a = fun(const Type1 &a, const Type2 &b);`.     
+
+Например:
+```cpp
+int sum = std::accumulate(numbers.begin(), numbers.end(), 0);
+int product = std::accumulate(numbers.begin(), numbers.end(), 1, std::multiplies<int>{}); //#include <functional>
 ```

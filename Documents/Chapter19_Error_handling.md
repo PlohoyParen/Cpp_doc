@@ -94,3 +94,49 @@ int getArrayValue(const std::array<int, 10> &array, int index)
 }
 ```
 Termination means that the program is stopped and all the data is lost (unless it was handled before `exit` call).
+
+## 3. Exceptions
+There are 3 keywords:
+- **throw** used to throw an exception. It could be any type:
+	```cpp
+	throw -1; // throw a literal integer value
+	throw ENUM_INVALID_INDEX; // throw an enum value
+	throw "Can not take square root of negative number"; // throw a literal C-style (const char*) string
+	throw dX; // throw a double variable that was previously defined
+	throw MyException("Fatal Error"); // Throw an object of class MyException
+	```
+- **try** - *observer block*. The block where the program looks for exceptions.
+- **catch(type)** - *handler block*. The block where the problem is handled before program proceeds. It is specific to the type. So, 
+	- `catch(int x)` - will catch only `throw` with int value. `
+	- `catch(const std::string& str)` - will catch only `throw` with string. Чтобы передача в блок не происходила значению (те копированием), то сложные типа надо проверять/передавать по const reference.
+	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.
+```cpp
+#include <iostream>
+#include <string>
+ 
+int main()
+{
+    try	
+    {	// Statements that may throw exceptions you want to handle go here
+        throw -1; // here's a trivial example
+    }
+    catch (int x)
+    {   // Any exceptions of type int thrown within the above try block get sent here
+        std::cerr << "We caught an int exception with value: " << x << '\n';
+    }
+    catch (double) // no variable name since we don't use the exception itself in the catch block below
+    {
+        // Any exceptions of type double thrown within the above try block get sent here
+        std::cerr << "We caught an exception of type double" << '\n';
+    }
+    catch (const std::string &str) // catch classes by const reference
+    {
+        // Any exceptions of type std::string thrown within the above try block get sent here
+        std::cerr << "We caught an exception of type std::string" << '\n';
+    }
+ 
+    std::cout << "Continuing on our merry way\n";
+ 
+    return 0;
+}
+```

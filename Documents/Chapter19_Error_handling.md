@@ -96,7 +96,7 @@ int getArrayValue(const std::array<int, 10> &array, int index)
 Termination means that the program is stopped and all the data is lost (unless it was handled before `exit` call).
 
 ## 3. Exceptions
-There are 3 keywords:
+### Основы
 - **throw** used to throw an exception. It could be any type:
 	```cpp
 	throw -1; // throw a literal integer value
@@ -111,7 +111,7 @@ There are 3 keywords:
 	- `catch(const std::string& str)` - will catch only `throw` with string. Чтобы передача в блок не происходила значению (те копированием), то сложные типа надо проверять/передавать по const reference.
 	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.
 	
-После того как `catch()` обработает ошибку, программа продолжит свое выполнение далее. Пример программы:
+После того как `catch()` обработает ошибку, программа продолжит свое выполнение далее. Пример простой (но нереалистичной) программы:
 ```cpp
 #include <iostream>
 #include <string>
@@ -143,3 +143,6 @@ int main()
     return 0;
 }
 ```
+
+### Stack unwinding
+В программе выше exception вызвано прямо в try блоке, который тут же все обработал. На самом деле, так не делают. Обычно кто-то пишет свою ф-цию/объект, а у него при определенном повидении вызывается исключение. Обработка же пишется вне этой ф-ции/объекта. 

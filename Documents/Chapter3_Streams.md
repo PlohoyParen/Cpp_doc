@@ -15,7 +15,42 @@ if (std::cin.fail()) 		 // если предыдущее извлечение н
 else 
     return a;			 // В случаи, что проблем нет возращаем введенные данные
 ```
-Можно сделать `while(true){}`, где принимать `std::cin >> a;`, а затем проводить тест используя кусок кода выше. Тогда, если все ОК то данные пройдут, если не ОК, то буфер отчистится и пользователь введет данные еще раз.
+Можно сделать `while(true){}`, где принимать `std::cin >> a;`, а затем проводить тест используя кусок кода выше. Тогда, если все ОК то данные пройдут, если не ОК, то буфер отчистится и пользователь введет данные еще раз.    
+
+----
+
+Если `std::cin` ожидает переменную определенного формата, но из потока приходит другая, то поток переходит в состояние fail и `std::cin.fail()` возвращает True.
+```cpp
+#include<iostream>
+#include<limits>
+using namespace std;
+
+int main()
+{
+int a;
+
+cout<<"Enter an integer number\n";
+cin>>a;
+while(1)
+{
+	if(cin.fail())
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cout<<"You have entered wrong input"<<endl;
+		cin>>a;
+	}
+	if(!cin.fail())
+		break;
+}
+
+cout<<"the number is: "<<a<<endl;
+return 0;
+}
+```
+`cin.fail()` - This function returns true when an input failure occurs. In this case it would be an input that is not an integer. If the cin fails then the input buffer is kept in an error state. `cin.clear()` - This is used to clear the error state of the buffer so that further processing of input can take place. This ensures that the input does not lead to an infinite loop of error message display. `cin.ignore()` - This function is used to ignore the rest of the line after the first instance of error that has occurred and it skips to or moves to the next line.     
+
+Тут однако может возникнуть проблема в том, что если пользователь введет "1234ads23", то в переменную запишется "1234", потом поток зафейлится, но число останется записанной в переменную. Соответсенно `cout<<"the number is: "<<a<<endl;` выведет "1234". Простого решиния тут нет. Чтобы избежать такого косяка, нужно принимать все как строки и использовать regular expressions, которые по дефолту не поддерживаются в C++ (только с помощью сторонних библиотек). 
 
 ### get(char)
 Метод `cin.get()` принимает значения по-символьно.  `char c; cin.get(c);` - сохраняет полученный символ в переменную с. Если ввод закончен (и соотв. сin.get ничего не получает), то она возвращает `false`(поэтому ее удобно использовать в while и if). Также

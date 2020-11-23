@@ -116,7 +116,7 @@ Termination means that the program is stopped and all the data is lost (unless i
 
 2. If no appropriate catch handlers exist, execution of the program propagates to the next enclosing try block (up the stack). If no appropriate catch handlers can be found before the end of the program, the program will fail with an exception error.
 
-3. Note that the compiler will not perform implicit conversions or promotions when matching exceptions with catch blocks! For example, a char exception will not match with an int catch block. An int exception will not match a float catch block. However, casts from a derived class to one of its parent classes will be performed.
+3. Note that the compiler *will not perform implicit conversions or promotions when matching exceptions with catch blocks!* For example, a char exception will not match with an int catch block. An int exception will not match a float catch block. However, casts from a derived class to one of its parent classes will be performed.
 
 Пример простой (но нереалистичной) программы:
 ```cpp

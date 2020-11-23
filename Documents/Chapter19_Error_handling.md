@@ -1,5 +1,5 @@
 # Chapter19: Error handling
-## Motivation
+## 1. Motivation
 
 There are two types of errors:
 1. **Syntax errors** - wrong C++ syntax. Compiler will find it.      
@@ -34,7 +34,7 @@ There are two types of errors:
 2. Handle the error 
 
 
-## std::assert(), std::exit(), std::cerr()
+## 2. std::assert(), std::exit() and std::cerr()
 ### std::assert() and std::static_assert()
 `std::assert(logic_condition)` is a preprocessor macro that evaluates a conditional expression (logic) at runtime. If the conditional expression is true, the assert statement does nothing. If the conditional expression evaluates to false, an error message is displayed and the program is terminated. 
 ```cpp

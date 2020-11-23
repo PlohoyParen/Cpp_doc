@@ -121,6 +121,7 @@ int main()
     try	
     {	// Statements that may throw exceptions you want to handle go here
         throw -1; // here's a trivial example
+	std::cout << "This never prints\n"; // once the exception is thrown, program leaves the current try block
     }
     catch (int x)
     {   // Any exceptions of type int thrown within the above try block get sent here

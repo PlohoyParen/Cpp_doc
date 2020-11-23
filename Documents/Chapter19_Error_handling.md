@@ -110,6 +110,8 @@ There are 3 keywords:
 	- `catch(int x)` - will catch only `throw` with int value. `
 	- `catch(const std::string& str)` - will catch only `throw` with string. Чтобы передача в блок не происходила значению (те копированием), то сложные типа надо проверять/передавать по const reference.
 	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.
+	
+После того как `catch()` обработает ошибку, программа продолжит свое выполнение далее. Пример программы:
 ```cpp
 #include <iostream>
 #include <string>

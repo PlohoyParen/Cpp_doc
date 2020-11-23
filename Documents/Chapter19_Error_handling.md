@@ -109,9 +109,16 @@ Termination means that the program is stopped and all the data is lost (unless i
 - **catch(type)** - *handler block*. The block where the problem is handled before program proceeds. It is specific to the type. So, 
 	- `catch(int x)` - will catch only `throw` with int value. `
 	- `catch(const std::string& str)` - will catch only `throw` with string. Чтобы передача в блок не происходила значению (те копированием), то сложные типа надо проверять/передавать по const reference.
-	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.
-	
-После того как `catch()` обработает ошибку, программа продолжит свое выполнение далее. Пример простой (но нереалистичной) программы:
+	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.    
+
+#### rules of excaption handling 
+1. When an exception is raised (using throw), execution of the program immediately jumps to the nearest enclosing try block (propagating up the stack if necessary to find an enclosing try block -- we’ll discuss this in more detail next lesson). If any of the catch handlers attached to the try block handle that type of exception, that handler is executed and the exception is considered handled. When the exception is handled the program continues normally.      
+
+2. If no appropriate catch handlers exist, execution of the program propagates to the next enclosing try block. If no appropriate catch handlers can be found before the end of the program, the program will fail with an exception error.
+
+3. Note that the compiler will not perform implicit conversions or promotions when matching exceptions with catch blocks! For example, a char exception will not match with an int catch block. An int exception will not match a float catch block. However, casts from a derived class to one of its parent classes will be performed.
+
+Пример простой (но нереалистичной) программы:
 ```cpp
 #include <iostream>
 #include <string>

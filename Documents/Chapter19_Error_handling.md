@@ -112,7 +112,7 @@ Termination means that the program is stopped and all the data is lost (unless i
 	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.    
 
 #### rules of excaption handling 
-1. When an exception is raised (using throw), execution of the program immediately jumps to the nearest enclosing try block (propagating up the stack if necessary to find an enclosing try block -- we’ll discuss this in more detail next lesson). If any of the catch handlers attached to the try block handle that type of exception, that handler is executed and the exception is considered handled. When the exception is handled the program continues normally.      
+1. When an exception is raised (using throw), execution of the program immediately jumps to the nearest enclosing try block (propagating up the stack if necessary to find an enclosing try block). If any of the catch handlers attached to the try block handle that type of exception, that handler is executed and the exception is considered handled. When the exception is handled the program continues normally.      
 
 2. If no appropriate catch handlers exist, execution of the program propagates to the next enclosing try block. If no appropriate catch handlers can be found before the end of the program, the program will fail with an exception error.
 

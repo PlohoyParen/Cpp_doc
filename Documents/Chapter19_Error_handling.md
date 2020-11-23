@@ -96,7 +96,7 @@ int getArrayValue(const std::array<int, 10> &array, int index)
 Termination means that the program is stopped and all the data is lost (unless it was handled before `exit` call).
 
 ## 3. Exceptions
-### Основы
+### Keywords
 - **throw** used to throw an exception. It could be any type:
 	```cpp
 	throw -1; // throw a literal integer value
@@ -111,10 +111,10 @@ Termination means that the program is stopped and all the data is lost (unless i
 	- `catch(const std::string& str)` - will catch only `throw` with string. Чтобы передача в блок не происходила значению (те копированием), то сложные типа надо проверять/передавать по const reference.
 	- `catch(const Dude& my_dude)` - только для `throw` передающего объект класса Dude.    
 
-#### rules of excaption handling 
-1. When an exception is raised (using throw), execution of the program immediately jumps to the nearest enclosing try block (propagating up the stack if necessary to find an enclosing try block). If any of the catch handlers attached to the try block handle that type of exception, that handler is executed and the exception is considered handled. When the exception is handled the program continues normally.      
+### rules of excaption handling 
+1. When an exception is raised (using throw), execution of the program immediately jumps to the nearest enclosing try block (propagating up the stack if necessary to find an enclosing try block). If any of the catch handlers attached to the try block handle that type of exception, that handler is executed and the exception is considered handled. When the exception is handled the program continues normally. If an exception is routed to a catch block, it is considered “handled” even if the catch block is empty.     
 
-2. If no appropriate catch handlers exist, execution of the program propagates to the next enclosing try block. If no appropriate catch handlers can be found before the end of the program, the program will fail with an exception error.
+2. If no appropriate catch handlers exist, execution of the program propagates to the next enclosing try block (up the stack). If no appropriate catch handlers can be found before the end of the program, the program will fail with an exception error.
 
 3. Note that the compiler will not perform implicit conversions or promotions when matching exceptions with catch blocks! For example, a char exception will not match with an int catch block. An int exception will not match a float catch block. However, casts from a derived class to one of its parent classes will be performed.
 

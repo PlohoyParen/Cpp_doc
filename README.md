@@ -378,6 +378,8 @@
 			- std::istream_iterator и std::ostream_iterator
 	- [Базовый итератор для кастомного класса](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0)
 	
+19. [**Chapter 19: Error handling**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter19_Error_handling.md) 	
+	
 49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono
 	- random (и cstdlib)

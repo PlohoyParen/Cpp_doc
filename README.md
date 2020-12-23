@@ -1,7 +1,7 @@
 # NOTE
 Я остановился на:
 - [Ravesli](https://ravesli.com/uroki-cpp/) на Главе 14: исключения. (альтернативно: [Eng](https://www.learncpp.com/))
-- [Chili C++, intermediate](https://www.youtube.com/watch?v=kOsnq5JJvaw&list=PLqCJpWy5Fohfil0gvjzgdV4h29R9kDKtZ)
+- [Chili C++, intermediate](https://www.youtube.com/watch?v=kOsnq5JJvaw&list=PLqCJpWy5Fohfil0gvjzgdV4h29R9kDKtZ): Tutorial 19: dynamic_cast / RTTI typeid
 
 # Ouline
 1. [**Chapter 1: General**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter1_General.md)     

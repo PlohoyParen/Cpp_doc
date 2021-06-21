@@ -4,7 +4,7 @@
 - [Chili C++, intermediate](https://www.youtube.com/watch?v=kOsnq5JJvaw&list=PLqCJpWy5Fohfil0gvjzgdV4h29R9kDKtZ): Tutorial 19: dynamic_cast / RTTI typeid
 
 # Ouline
-1. [**Chapter 1: General**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter1_General.md)     
+1. [**Chapter 1: General**](./Chapters/Chapter1_General.md)     
 	- Важные понятия и термины
 	- General structure  
 		- Вид типичного ситаксиса   
@@ -25,7 +25,7 @@
 	- Раннее и позднее связывание ( Early binding and late binding )
 		
 
-2. [**Chapter 2: Operators**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter2_Operators.md)     
+2. [**Chapter 2: Operators**](./Chapters/Chapter2_Operators.md)     
 	- Assiment and initialisation
 	- Виды инициализации: прямая, uniform, копирующая
 	- Оператор запятая (,)    
@@ -36,7 +36,7 @@
 		- cmath
 		- random number generator 
 		
-3. [**Chapter 3: Streams**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter3_Streams.md)   
+3. [**Chapter 3: Streams**](./Chapters/Chapter3_Streams.md)   
 	- std::cin
 		- обработка некорректного ввода
 		- getline(cin, str)
@@ -55,7 +55,7 @@
 		- binary mode
 	- stringstream
 
-4. [**Chapter 4: Memory**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter4_Memory.md)
+4. [**Chapter 4: Memory**](./Chapters/Chapter4_Memory.md)
 	- Pointers
 		- Указатель * и &
 		- Размер
@@ -77,7 +77,7 @@
 		
 			
 
-5. [**Chapter 5: Data types**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter5_Data_types.md)
+5. [**Chapter 5: Data types**](./Chapters/Chapter5_Data_types.md)
 	- Basic data types
 		- Встроенные типы: размеры
 		- char
@@ -111,7 +111,7 @@
 		- Short enum
 	- Helpful functions
 	
-6.  [**Chapter 6: Classes**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter6_Classes.md)
+6.  [**Chapter 6: Classes**](./Chapters/Chapter6_Classes.md)
 	 - Общее
 	 	- Initialization
 	 - Struct (public class)
@@ -163,7 +163,7 @@
 	- Circular dependency (and forward declaration)
 
 	
-7. [**Chapter 7: Control Flow**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter7_Flow_Control.md)
+7. [**Chapter 7: Control Flow**](./Chapters/Chapter7_Flow_Control.md)
 	- Branches (Ветвление)
 		- is else
 		- Switch
@@ -174,7 +174,7 @@
 		- for
 		- while, while do
 
-8. [**Chapter 8: Functions**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter8_Functions.md)
+8. [**Chapter 8: Functions**](./Chapters/Chapter8_Functions.md)
 	- Термины 
 	- Общее, main, void
 		-Передача в main() аргументов из командной строки
@@ -202,7 +202,7 @@
 		- std::function
 	- Эллипсис (ellipsis) аргумент
 
-9. [**Chapter 9: Files and project magement**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter9_Files_and_project_manegment.md)
+9. [**Chapter 9: Files and project magement**](./Chapters/Chapter9_Files_and_project_manegment.md)
 	- Добавление файла в проект
 	- header file (.h)
 		- Директивы препроцессора
@@ -210,7 +210,7 @@
 	- Рефакторинг классов
 		- Область принадлежности (::)
 	
-10. [**Chapter 10: Scopes**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter10_Scopes.md)
+10. [**Chapter 10: Scopes**](./Chapters/Chapter10_Scopes.md)
 	- Scopes (Зоны видимости)
 		- Локальные переменные, глобальные переменные (static, extern) 
 		- сокрытие имен, глобальные ф-ции
@@ -218,25 +218,25 @@
 		- Глобальное пространство имен 
 		- :: и using
 		- Псевдонимы (вложение)
-11. [**Chapter 11: Algorithm lib**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter11_Algorithm_lib.md)
-	- [A few things algorithm relies on](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter11_Algorithm_lib.md#a-few-things-algorithm-relies-on)
+11. [**Chapter 11: Algorithm lib**](./Chapters/Chapter11_Algorithm_lib.md)
+	- [A few things algorithm relies on](./Chapters/Chapter11_Algorithm_lib.md#a-few-things-algorithm-relies-on)
 		- 1. Comparasing functors
 			- functional lib
 			- Свой функтор сравнения
 		- 2. Predicates
 		- 3. lambda functions
-	- [1. Sequence operators](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter11_Algorithm_lib.md#1-sequence-operators)
+	- [1. Sequence operators](./Chapters/Chapter11_Algorithm_lib.md#1-sequence-operators)
 		- sort и stable_sort
 		- remove and remove_if
 		- copy and copy_if
 		- for_each
 		- swap
 		- set_difference
-	- [2. Mathematics](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter11_Algorithm_lib.md#2-mathematics)
+	- [2. Mathematics](./Chapters/Chapter11_Algorithm_lib.md#2-mathematics)
 		- count
 		- accoumulate
 
-12. [**Chapter 12: std data types**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter12_std_data_types.md)
+12. [**Chapter 12: std data types**](./Chapters/Chapter12_std_data_types.md)
 	- strings
 	- std::array
 	- vector
@@ -254,13 +254,13 @@
 		- Оперции над множествами (сравнение и разница)
 	- std::initializer_list
 		
-13.  [**Chapter 13: Exception handling**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/Chapter13_Exception_handling.md)    
+13.  [**Chapter 13: Exception handling**](./Chapters/Chapter13_Exception_handling.md)    
 	- exit() и cerr   
 	- assert и static_assert
 		- static_assert
 		- Debuger vs release (NDEBUG)
 		
-14. [**Chapter 14: Operator overloading**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter14_Operator_overload.md)
+14. [**Chapter 14: Operator overloading**](./Chapters/Chapter14_Operator_overload.md)
 	- Перегразка через обычные ф-ции
 		- Перегрузка через дружественные ф-ции
 		- Когда лучше использовать
@@ -287,7 +287,7 @@
 		- Самоприсваивание, возврат *this
 		- delete
 		
-15. [**Chapter 15: Inheritance**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter15_Inheritance.md)
+15. [**Chapter 15: Inheritance**](./Chapters/Chapter15_Inheritance.md)
 	- Общее
 	- Порядок построения дочерних классов
 		- Инициализация членов родительского класса при наследовании
@@ -311,7 +311,7 @@
 	- dynamic_cast и static_cast
 		- dynamic vs static
 
-16. [**Chapter 16: Virtual functions**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter16_Virtual_functions.md)
+16. [**Chapter 16: Virtual functions**](./Chapters/Chapter16_Virtual_functions.md)
 	- Перегрузка (overload) vs переопределение (override)
 	- Полиморфизм (и постановка задачи)
 		- Пример с ф-цией
@@ -338,53 +338,53 @@
 		- Чистые виртуальные функции и виртуальная таблица
 	- Перегрузка потоков ввода и вывода
 	
-17. [**Chapter 17: Templates**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md)
-	- [Как это решалось в C (спойлер: макросы)](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D0%BA%D0%B0%D0%BA-%D1%8D%D1%82%D0%BE-%D1%80%D0%B5%D1%88%D0%B0%D0%BB%D0%BE%D1%81%D1%8C-%D0%B2-c-%D1%81%D0%BF%D0%BE%D0%B9%D0%BB%D0%B5%D1%80-%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D1%8B)
-	- [Шаблоны ф-ций](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D1%84-%D1%86%D0%B8%D0%B9)
+17. [**Chapter 17: Templates**](./Chapters/Chapter17_Templates.md)
+	- [Как это решалось в C (спойлер: макросы)](./Chapters/Chapter17_Templates.md#%D0%BA%D0%B0%D0%BA-%D1%8D%D1%82%D0%BE-%D1%80%D0%B5%D1%88%D0%B0%D0%BB%D0%BE%D1%81%D1%8C-%D0%B2-c-%D1%81%D0%BF%D0%BE%D0%B9%D0%BB%D0%B5%D1%80-%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D1%8B)
+	- [Шаблоны ф-ций](./Chapters/Chapter17_Templates.md#%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D1%84-%D1%86%D0%B8%D0%B9)
 		- Как компилятор реализует шаблоны ф-ций
 		- Явная специализация шаблона ф-ции
 		- Вывод аргументов (deduce)
 		- Перегрузка щаблонов
 		- Явная специализация VS перегрузка шаблона
 		- Шаблоны методов (в основном для больщой 4ки)
-	- [Шаблоны классов](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2)
+	- [Шаблоны классов](./Chapters/Chapter17_Templates.md#%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2)
 		- Заголовочные файлы
 		- Явная специализация шаблона класса
 			- Полная специализация
 			- Частичная специализация 
 				- Использование родительского класса для частичной специализации метода класса
 		- typedef мета
-	- [none-type параметр](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#none-type-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80)   
+	- [none-type параметр](./Chapters/Chapter17_Templates.md#none-type-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80)   
 		- Еще пример использования none-type параметра 
-	- [template и функторы - союз созданный на небесах](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#template-%D0%B8-%D1%84%D1%83%D0%BD%D0%BA%D1%82%D0%BE%D1%80%D1%8B---%D1%81%D0%BE%D1%8E%D0%B7-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BD%D0%B0-%D0%BD%D0%B5%D0%B1%D0%B5%D1%81%D0%B0%D1%85)
-	- [Несколько фич связанныз с классами](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter17_Templates.md#%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D1%84%D0%B8%D1%87-%D1%81%D0%B2%D1%8F%D0%B7%D0%B0%D0%BD%D0%BD%D1%8B%D0%B7-%D1%81-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0%D0%BC%D0%B8)
+	- [template и функторы - союз созданный на небесах](./Chapters/Chapter17_Templates.md#template-%D0%B8-%D1%84%D1%83%D0%BD%D0%BA%D1%82%D0%BE%D1%80%D1%8B---%D1%81%D0%BE%D1%8E%D0%B7-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BD%D0%B0-%D0%BD%D0%B5%D0%B1%D0%B5%D1%81%D0%B0%D1%85)
+	- [Несколько фич связанныз с классами](./Chapters/Chapter17_Templates.md#%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D1%84%D0%B8%D1%87-%D1%81%D0%B2%D1%8F%D0%B7%D0%B0%D0%BD%D0%BD%D1%8B%D0%B7-%D1%81-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0%D0%BC%D0%B8)
 		- Использование зависимых имён
 		- Использование функций для вывода параметров
 
-18. [**Chapter 18: Iterators**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md)
-	- [Основы синтаксиса](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%81%D0%B8%D0%BD%D1%82%D0%B0%D0%BA%D1%81%D0%B8%D1%81%D0%B0)
+18. [**Chapter 18: Iterators**](./Chapters/Chapter18_Iterators.md)
+	- [Основы синтаксиса](./Chapters/Chapter18_Iterators.md#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%81%D0%B8%D0%BD%D1%82%D0%B0%D0%BA%D1%81%D0%B8%D1%81%D0%B0)
 		- Iterator invalidation
-	- [Инкриментирование в итераторах](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B8%D0%BD%D0%BA%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85)
-	- [Итераторы бывают разные](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-%D0%B1%D1%8B%D0%B2%D0%B0%D1%8E%D1%82-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%B5)
-	- [Почему вся STL построена на итераторах?](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%B2%D1%81%D1%8F-stl-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BD%D0%B0-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85)
-	- [Const iterator](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#const-iterator)
-	- [Reverse interator](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#reverse-interator)
-	- [Библиотека <iterator>](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B0-iterator)
+	- [Инкриментирование в итераторах](./Chapters/Chapter18_Iterators.md#%D0%B8%D0%BD%D0%BA%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85)
+	- [Итераторы бывают разные](./Chapters/Chapter18_Iterators.md#%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-%D0%B1%D1%8B%D0%B2%D0%B0%D1%8E%D1%82-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D0%B5)
+	- [Почему вся STL построена на итераторах?](./Chapters/Chapter18_Iterators.md#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%B2%D1%81%D1%8F-stl-%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BD%D0%B0-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85)
+	- [Const iterator](./Chapters/Chapter18_Iterators.md#const-iterator)
+	- [Reverse interator](./Chapters/Chapter18_Iterators.md#reverse-interator)
+	- [Библиотека <iterator>](./Chapters/Chapter18_Iterators.md#%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B0-iterator)
 		- std::begin() и std::end()
 		- std::advace()
 		- Iterator adaptors
 			- std::back_insert_iterator и std::back_inserter
 		- Stream iterators
 			- std::istream_iterator и std::ostream_iterator
-	- [Базовый итератор для кастомного класса](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter18_Iterators.md#%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0)
+	- [Базовый итератор для кастомного класса](./Chapters/Chapter18_Iterators.md#%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0)
 	
-19. [**Chapter 19: Error handling**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter19_Error_handling.md) 	
+19. [**Chapter 19: Error handling**](./Chapters/Chapter19_Error_handling.md) 	
 	
-49. [**Chapter X: Useful STD Libraries**](https://github.com/PlohoyParen/Cpp_doc/blob/master/Documents/Chapter_X_Useful_%20STD_Libraries.md)
+49. [**Chapter X: Useful STD Libraries**](./Chapters/Chapter_X_Useful_%20STD_Libraries.md)
 	- chrono
 	- random (и cstdlib)
 
-50. [**Chapter X: Other**](https://github.com/PlohoyParen/Cpp_doc/tree/master/Documents/ChapterX_Other.md)
+50. [**Chapter X: Other**](./Chapters/ChapterX_Other.md)
 	- Использование слова static
 		- Global scope
 		- Class 
